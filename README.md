@@ -25,3 +25,4 @@ To do
 * Improve build process: E.g. use CMake instead of writing makefile manually
 * Add console-writing functionalities for as-yet-unimplemented callbacks
 * Move the classes under `forecast_io/writers` and any other classes used only by the demo program to `console_weather`
+* Make demo writer classes wrap data at terminal edge
