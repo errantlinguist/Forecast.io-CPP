@@ -38,12 +38,12 @@ OBJ_DIRNAME = obj
 
 # Distributions ---------------------------------------------------------------
 # TODO: Generalize these constants/rules by using eval function (https://www.gnu.org/software/make/manual/html_node/Eval-Function.html) and/or target-specific variable values (https://www.gnu.org/software/make/manual/make.html#Target%5F002dspecific)
-DEBUG_DIR = $(DIST_ROOT_DIR)/debug
+DEBUG_DIR = $(DIST_ROOT_DIR)/Debug
 DEBUG_EXECUTABLE = $(DEBUG_DIR)/$(EXECUTABLE_NAME)
 DEBUG_OBJ_DIR = $(DEBUG_DIR)/$(OBJ_DIRNAME)
 DEBUG_OBJS = $(patsubst $(SOURCE_DIR)/%$(SOURCE_FILE_SUFFIX), $(DEBUG_OBJ_DIR)/%$(OBJ_FILE_SUFFIX), $(SOURCES))	# Set of object files to be compiled
 
-RELEASE_DIR = $(DIST_ROOT_DIR)/release
+RELEASE_DIR = $(DIST_ROOT_DIR)/Release
 RELEASE_EXECUTABLE = $(RELEASE_DIR)/$(EXECUTABLE_NAME)
 RELEASE_OBJ_DIR = $(RELEASE_DIR)/$(OBJ_DIRNAME)
 RELEASE_OBJS = $(patsubst $(SOURCE_DIR)/%$(SOURCE_FILE_SUFFIX), $(RELEASE_OBJ_DIR)/%$(OBJ_FILE_SUFFIX), $(SOURCES))	# Set of object files to be compiled
