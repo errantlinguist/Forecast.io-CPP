@@ -8,7 +8,7 @@ OBJ_FILE_SUFFIX = .o
 LINK$(OBJ_FILE_SUFFIX) = $(CXX) $(LDFLAGS) $(TARGET_ARCH)	# Use C++ linker by default (instead of C linker)
 
 DEBUG_FLAGS = -g -O0	# Extra flags to add for debugging
-RELEASE_FLAGS = -O3	# Extra flags to add for release distributions
+RELEASE_FLAGS = -O2	# Extra flags to add for release distributions
 
 ## System settings -------------------------------------------------------------
 SYSTEM_INCLUDE_DIRECTORIES = /usr/include
