@@ -1,5 +1,5 @@
-#ifndef OS_CHECK_HPP
-#define OS_CHECK_HPP
+#ifndef OS_CHECK_H
+#define OS_CHECK_H
 
 #ifndef UNIX
 	#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
@@ -7,4 +7,4 @@
 	#endif
 #endif
 
-#endif // OS_CHECK_HPP
+#endif // OS_CHECK_H
