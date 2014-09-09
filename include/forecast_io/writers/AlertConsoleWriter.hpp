@@ -19,7 +19,6 @@ class AlertConsoleWriter: public common::AbstractStreamWriter<Alert>
 public:
 
 	AlertConsoleWriter(int consoleWidth);
-	virtual ~AlertConsoleWriter();
 
 	void write(const Alert& value, std::ostream& output);
 

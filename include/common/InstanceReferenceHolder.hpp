@@ -15,11 +15,6 @@ public:
 
 	}
 
-	virtual ~InstanceReferenceHolder()
-	{
-
-	}
-
 	const T& getInstance() const
 	{
 		return *pInstance;

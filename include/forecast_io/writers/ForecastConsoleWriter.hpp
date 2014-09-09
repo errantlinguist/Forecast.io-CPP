@@ -23,7 +23,6 @@ class ForecastConsoleWriter: public common::AbstractStreamWriter<Forecast>
 public:
 
 	ForecastConsoleWriter(int consoleWidth);
-	virtual ~ForecastConsoleWriter();
 
 	void write(const Forecast& value, std::ostream& output);
 

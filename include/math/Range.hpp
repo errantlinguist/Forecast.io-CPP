@@ -8,9 +8,7 @@ template<typename T>
 class Range
 {
 public:
-	Range()
-	{
-	}
+	Range() = default;
 
 	Range(T min, T max) :
 			min(min), max(max)

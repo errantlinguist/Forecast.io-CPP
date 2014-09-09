@@ -9,8 +9,6 @@ class Alert;
 namespace listeners
 {
 
-AlertsListener::~AlertsListener() {}
-
 void AlertsListener::notifyAlert(Alert& alert) {}
 
 }

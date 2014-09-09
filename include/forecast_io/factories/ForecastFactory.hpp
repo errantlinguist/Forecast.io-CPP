@@ -25,7 +25,7 @@ class Forecast;
 namespace factories
 {
 
-class ForecastFactory: public common::AbstractFactory<std::unique_ptr<Forecast> >,
+class ForecastFactory: public common::AbstractFactory<std::unique_ptr<Forecast>>,
 		public forecast_io::listeners::AlertsListener,
 		public forecast_io::listeners::ForecastDetailsListener,
 		public forecast_io::listeners::FlagsListener
@@ -34,7 +34,6 @@ class ForecastFactory: public common::AbstractFactory<std::unique_ptr<Forecast> 
 public:
 
 	ForecastFactory(math::MeasurementSystem defaultUnits);
-	virtual ~ForecastFactory();
 
 	virtual void notifyAlert(Alert& alert);
 	virtual void notifyCurrentWeather(SynchronicDataPoint& dataPoint);

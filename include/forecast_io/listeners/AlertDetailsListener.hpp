@@ -13,7 +13,7 @@ class AlertDetailsListener
 {
 public:
 
-	virtual ~AlertDetailsListener();
+	virtual ~AlertDetailsListener() = default;
 
 	virtual void notifyTitle(const std::string& title);
 	virtual void notifyExpiryTime(time_t expiryTime);

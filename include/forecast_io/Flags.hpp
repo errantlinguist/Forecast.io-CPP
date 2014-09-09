@@ -21,10 +21,7 @@ public:
 			std::unordered_set<std::string> sources,
 			std::unordered_multimap<std::string, std::string> stations,
 			math::MeasurementSystem units);
-	Flags(const Flags& copyee);
-	virtual ~Flags();
-
-	virtual Flags& operator= (const Flags& other);
+	virtual ~Flags() = default;
 
 	virtual std::ostream& dump(std::ostream& o) const;
 	virtual std::string str() const;

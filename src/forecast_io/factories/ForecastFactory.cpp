@@ -22,11 +22,6 @@ ForecastFactory::ForecastFactory(math::MeasurementSystem defaultUnits, std::uniq
 
 }
 
-ForecastFactory::~ForecastFactory()
-{
-
-}
-
 void ForecastFactory::clear()
 {
 	result.reset(new Forecast(defaultUnits));

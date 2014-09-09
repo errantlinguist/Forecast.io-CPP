@@ -12,10 +12,7 @@ class TimeWriter : public common::AbstractStreamWriter<time_t>
 {
 public:
 	TimeWriter(const char* format, size_t maxLength);
-	TimeWriter(const TimeWriter& copyee);
-	virtual ~TimeWriter();
-
-	virtual TimeWriter& operator= (const TimeWriter& other);
+	virtual ~TimeWriter() = default;
 
 	virtual void write(const time_t& value, std::ostream& output);
 

@@ -18,8 +18,6 @@ class SingleDataPointFactory: public common::AbstractFactory<SingleDataPoint>,
 {
 public:
 
-	virtual ~SingleDataPointFactory();
-
 	SingleDataPoint create();
 
 	const DataPointFactory& getDataPointFactory() const

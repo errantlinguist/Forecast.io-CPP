@@ -15,12 +15,7 @@ AlertConsoleWriter::AlertConsoleWriter(int consoleWidth) :
 	headerSeparator(createHeaderSeparator('-',
 		consoleWidth / 2))
 {
-
-}
-
-AlertConsoleWriter::~AlertConsoleWriter()
-{
-
+	// ctor
 }
 
 // Members ----------------------------------------------------------------------

@@ -13,9 +13,6 @@ public:
 	Precipitation();
 	Precipitation(double intensity, double probability, std::string type);
 
-//	virtual std::ostream& dump(std::ostream& o) const;
-//	virtual std::string str() const;
-
 // Constant getters ---------------------------------------------------------
 	double getIntensity() const
 	{
@@ -26,7 +23,7 @@ public:
 	{
 		return probability;
 	}
-	
+
 	std::string getType() const
 	{
 		return type;
@@ -42,7 +39,7 @@ public:
 	{
 		this->probability = probability;
 	}
-	
+
 	void setType(std::string type)
 	{
 		this->type = type;
@@ -57,14 +54,5 @@ private:
 };
 
 }
-
-/*namespace std
- {
-
- string to_string(const forecast_io::Precipitation& value);
-
- }
-
- std::ostream& operator<<(std::ostream& o, const forecast_io::Precipitation& value);*/
 
 #endif // PRECIPITATION_HPP

@@ -15,7 +15,7 @@ class FlagListener
 {
 public:
 
-	virtual ~FlagListener();
+	virtual ~FlagListener() = default;
 
 	virtual void notifyDarkskyUnavailable(bool darkskyUnavailable);
 	virtual void notifySources(std::unordered_set<std::string>& sources);

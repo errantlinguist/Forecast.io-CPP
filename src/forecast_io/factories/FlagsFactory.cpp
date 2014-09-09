@@ -12,11 +12,6 @@ FlagsFactory::FlagsFactory(math::MeasurementSystem defaultUnits) : defaultUnits(
 
 }
 
-FlagsFactory::~FlagsFactory()
-{
-
-}
-
 Flags FlagsFactory::create()
 {
 	return result;

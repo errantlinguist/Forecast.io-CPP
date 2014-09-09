@@ -8,6 +8,7 @@
 
 #include "../math/Coordinate.hpp"
 #include "Alert.hpp"
+#include "DataBlock.hpp"
 #include "Flags.hpp"
 #include "SynchronicDataPoint.hpp"
 
@@ -23,14 +24,7 @@ public:
 	typedef signed char time_offset_t;
 
 	Forecast(Flags flags);
-	Forecast(Flags flags, std::vector<Alert> alerts, math::Coordinate location, time_offset_t offset, std::string timezone);
-	Forecast(const Forecast& copyee);
-	virtual ~Forecast();
-
-	virtual Forecast& operator= (const Forecast& other);
-
-	virtual std::ostream& dump(std::ostream& o) const;
-	virtual std::string str() const;
+	Forecast(Flags flags, std::vector<Alert> alerts, math::Coordinate location, time_offset_t offset, std::string timezone, SynchronicDataPoint currentWeather, DataBlock minutelyWeather, DataBlock hourlyWeather);
 
 	// Constant getters ---------------------------------------------------------
 	const std::vector<Alert>& getAlerts() const
@@ -41,6 +35,16 @@ public:
 	const SynchronicDataPoint& getCurrentWeather() const
 	{
 		return currentWeather;
+	}
+
+	const DataBlock& getMinutelyWeather() const
+	{
+		return minutelyWeather;
+	}
+
+	const DataBlock& getHourlyWeather() const
+	{
+		return hourlyWeather;
 	}
 
 	const Flags& getFlags() const
@@ -74,6 +78,16 @@ public:
 		return currentWeather;
 	}
 
+	DataBlock& getMinutelyWeather()
+	{
+		return minutelyWeather;
+	}
+
+	DataBlock& getHourlyWeather()
+	{
+		return hourlyWeather;
+	}
+
 	Flags& getFlags()
 	{
 		return flags;
@@ -94,6 +108,16 @@ public:
 	void setCurrentWeather(SynchronicDataPoint currentWeather)
 	{
 		this->currentWeather = currentWeather;
+	}
+
+	void setMinutelyWeather(DataBlock weather)
+	{
+		this->minutelyWeather = weather;
+	}
+
+	void setHourlyWeather(DataBlock weather)
+	{
+		this->hourlyWeather = weather;
 	}
 
 	void setFlags(Flags flags)
@@ -121,6 +145,8 @@ private:
 
 	std::vector<Alert> alerts;
 	SynchronicDataPoint currentWeather;
+	DataBlock minutelyWeather;
+	DataBlock hourlyWeather;
 	Flags flags;
 	math::Coordinate location;
 	time_offset_t offset;

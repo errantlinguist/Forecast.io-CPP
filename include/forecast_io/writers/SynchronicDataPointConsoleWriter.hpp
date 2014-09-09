@@ -24,7 +24,6 @@ class SynchronicDataPointConsoleWriter: public common::AbstractStreamWriter<Sync
 {
 public:
 	SynchronicDataPointConsoleWriter(int consoleWidth, common::TimeWriter timeWriter = DEFAULT_TIME_WRITER);
-	virtual ~SynchronicDataPointConsoleWriter();
 
 	void write(const SynchronicDataPoint& value, std::ostream& output);
 

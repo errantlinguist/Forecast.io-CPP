@@ -16,7 +16,7 @@ class AbstractInstanceHolder
 {
 public:
 
-	virtual ~AbstractInstanceHolder() {}
+	virtual ~AbstractInstanceHolder() = default;
 
 	virtual const T& getInstance() const = 0;
 

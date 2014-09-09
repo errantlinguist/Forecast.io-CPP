@@ -23,7 +23,7 @@ public:
 	{
 		return loadInstanceLazily();
 	}
-	
+
 	static const std::string& getName(const math::MeasurementSystem measurementSystem);
 
 	static void releaseInstance()
@@ -32,8 +32,6 @@ public:
 	}
 
 private:
-
-	MeasurementSystemDefaultNameArrayHolder() {}
 
 	static std::unique_ptr<MeasurementSystemNameArray> pInstance;
 

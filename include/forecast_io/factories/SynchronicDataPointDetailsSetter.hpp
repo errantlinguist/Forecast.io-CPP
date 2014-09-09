@@ -19,7 +19,6 @@ class SynchronicDataPointDetailsSetter:
 {
 public:
 	SynchronicDataPointDetailsSetter(SynchronicDataPoint& instance);
-	virtual ~SynchronicDataPointDetailsSetter();
 
 	virtual void notifyApparentTemperature(double temperature);
 	virtual void notifyCloudCover(double cloudCover);

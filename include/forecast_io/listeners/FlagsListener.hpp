@@ -14,7 +14,7 @@ class FlagsListener
 {
 public:
 
-	virtual ~FlagsListener();
+	virtual ~FlagsListener() = default;
 
 	virtual void notifyFlags(Flags& flags);
 

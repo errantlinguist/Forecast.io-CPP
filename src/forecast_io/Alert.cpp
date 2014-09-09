@@ -17,28 +17,6 @@ Alert::Alert(std::string title, time_t expiryTime, std::string description,
 {
 }
 
-Alert::Alert(const Alert& copyee) : Alert(copyee.getTitle(), copyee.getExpiryTime(), copyee.getDescription(), copyee.getUri())
-{
-}
-
-Alert::~Alert()
-{
-
-}
-
-Alert& Alert::operator= (const Alert& other)
-{
-	if (this != &other) // protect against invalid self-assignment
-	{
-		this->title = other.getTitle();
-		this->expiryTime = other.getExpiryTime();
-		this->description = other.getDescription();
-        this->uri = other.getUri();
-	}
-	// by convention, always return *this
-	return *this;
-}
-
 bool Alert::equal_to(const Alert& other) const
 {
 	return ((expiryTime == other.expiryTime) && (uri == other.uri)

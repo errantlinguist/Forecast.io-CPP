@@ -9,7 +9,7 @@ class AbstractFactory
 {
 public:
 
-	virtual ~AbstractFactory() {}
+	virtual ~AbstractFactory() = default;
 
 	virtual T create() = 0;
 

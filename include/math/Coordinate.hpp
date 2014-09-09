@@ -15,10 +15,7 @@ public:
 	static std::string createLongitudeString(double longitude);
 
 	Coordinate();
-	virtual ~Coordinate();
-	Coordinate(const Coordinate& copyee);
-
-	virtual Coordinate& operator= (const Coordinate& other);
+	virtual ~Coordinate() = default;
 
 	virtual std::ostream& dump(std::ostream& o) const;
 	virtual std::string str() const;

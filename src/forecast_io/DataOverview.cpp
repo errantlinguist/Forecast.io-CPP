@@ -16,25 +16,6 @@ DataOverview::DataOverview(std::string summary, std::string iconName) : summary(
 {
 }
 
-DataOverview::DataOverview(const DataOverview& copyee) : DataOverview(copyee.getSummary(), copyee.getIconName())
-{
-}
-
-DataOverview::~DataOverview()
-{
-}
-
-DataOverview& DataOverview::operator= (const DataOverview& other)
-{
-	if (this != &other) // protect against invalid self-assignment
-	{
-		this->summary = other.getSummary();
-		this->iconName = other.getIconName();
-	}
-	// by convention, always return *this
-	return *this;
-}
-
 std::ostream& DataOverview::dump(std::ostream& o) const
 {
 	o << "DataOverview[getSummary()=";

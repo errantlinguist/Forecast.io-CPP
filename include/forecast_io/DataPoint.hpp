@@ -14,141 +14,141 @@ namespace forecast_io
 class DataPoint
 {
 public:
-	DataPoint();
-	DataPoint(time_t time, DataOverview overview, double cloudCover, double dewPoint, double humidity,
-			double ozone, Precipitation precipitation, double pressure, double visibility, math::RadialVelocity wind);
+    DataPoint();
+    DataPoint(time_t time, DataOverview overview, double cloudCover, double dewPoint, double humidity,
+              double ozone, Precipitation precipitation, double pressure, double visibility, math::RadialVelocity wind);
 
-	// Constant getters ---------------------------------------------------------
-	double getCloudCover() const
-	{
-		return cloudCover;
-	}
+    // Constant getters ---------------------------------------------------------
+    double getCloudCover() const
+    {
+        return cloudCover;
+    }
 
-	double getDewPoint() const
-	{
-		return dewPoint;
-	}
-	
-	double getHumidity() const
-	{
-		return humidity;
-	}
-	
-	const DataOverview& getOverview() const
-	{
-		return overview;
-	}
-	
-		double getOzone() const
-	{
-		return ozone;
-	}
+    double getDewPoint() const
+    {
+        return dewPoint;
+    }
 
-	const Precipitation& getPrecipitation() const
-	{
-		return precipitation;
-	}
-	
-	double getPressure() const
-	{
-		return pressure;
-	}
-	
-	time_t getTime() const
-	{
-		return time;
-	}
-	
-	double getVisibility() const
-	{
-		return visibility;
-	}
+    double getHumidity() const
+    {
+        return humidity;
+    }
 
-	const math::RadialVelocity& getWind() const
-	{
-		return wind;
-	}
+    const DataOverview& getOverview() const
+    {
+        return overview;
+    }
 
-	// Non-constant getters -----------------------------------------------------
-	DataOverview& getOverview()
-	{
-		return overview;
-	}
+    double getOzone() const
+    {
+        return ozone;
+    }
 
-	Precipitation& getPrecipitation()
-	{
-		return precipitation;
-	}
-	
-	math::RadialVelocity& getWind()
-	{
-		return wind;
-	}
+    const Precipitation& getPrecipitation() const
+    {
+        return precipitation;
+    }
 
-	// Setters ------------------------------------------------------------------
+    double getPressure() const
+    {
+        return pressure;
+    }
 
-	void setCloudCover(double cloudCover)
-	{
-		this->cloudCover = cloudCover;
-	}
+    time_t getTime() const
+    {
+        return time;
+    }
 
-	void setDewPoint(double dewPoint)
-	{
-		this->dewPoint = dewPoint;
-	}
-	
-	void setHumidity(double humidity)
-	{
-		this->humidity = humidity;
-	}
+    double getVisibility() const
+    {
+        return visibility;
+    }
 
-	void setOverview(DataOverview overview)
-	{
-		this->overview = overview;
-	}
-	
-	void setOzone(double ozone)
-	{
-		this->ozone = ozone;
-	}
+    const math::RadialVelocity& getWind() const
+    {
+        return wind;
+    }
 
-	void setPrecipitation(Precipitation precipitation)
-	{
-		this->precipitation = precipitation;
-	}
-	
-	void setPressure(double pressure)
-	{
-		this->pressure = pressure;
-	}
-	
-	void setTime(time_t time)
-	{
-		this->time = time;
-	}
+    // Non-constant getters -----------------------------------------------------
+    DataOverview& getOverview()
+    {
+        return overview;
+    }
 
-	void setVisibility(double visibility)
-	{
-		this->visibility = visibility;
-	}
-	
-	void setWind(math::RadialVelocity wind)
-	{
-		this->wind = wind;
-	}
+    Precipitation& getPrecipitation()
+    {
+        return precipitation;
+    }
+
+    math::RadialVelocity& getWind()
+    {
+        return wind;
+    }
+
+    // Setters ------------------------------------------------------------------
+
+    void setCloudCover(double cloudCover)
+    {
+        this->cloudCover = cloudCover;
+    }
+
+    void setDewPoint(double dewPoint)
+    {
+        this->dewPoint = dewPoint;
+    }
+
+    void setHumidity(double humidity)
+    {
+        this->humidity = humidity;
+    }
+
+    void setOverview(DataOverview overview)
+    {
+        this->overview = overview;
+    }
+
+    void setOzone(double ozone)
+    {
+        this->ozone = ozone;
+    }
+
+    void setPrecipitation(Precipitation precipitation)
+    {
+        this->precipitation = precipitation;
+    }
+
+    void setPressure(double pressure)
+    {
+        this->pressure = pressure;
+    }
+
+    void setTime(time_t time)
+    {
+        this->time = time;
+    }
+
+    void setVisibility(double visibility)
+    {
+        this->visibility = visibility;
+    }
+
+    void setWind(math::RadialVelocity wind)
+    {
+        this->wind = wind;
+    }
 
 private:
 
-	double cloudCover;
-	double dewPoint;
-	double humidity;	
-	DataOverview overview;
-	double ozone;
-	Precipitation precipitation;
-	double pressure;	
-	time_t time;
-	double visibility;
-	math::RadialVelocity wind;
+    double cloudCover;
+    double dewPoint;
+    double humidity;
+    DataOverview overview;
+    double ozone;
+    Precipitation precipitation;
+    double pressure;
+    time_t time;
+    double visibility;
+    math::RadialVelocity wind;
 
 };
 

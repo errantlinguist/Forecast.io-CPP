@@ -12,10 +12,6 @@ SingleDataPointDetailsSetter::SingleDataPointDetailsSetter(SingleDataPoint& inst
 {
 }
 
-SingleDataPointDetailsSetter::~SingleDataPointDetailsSetter()
-{
-}
-
 void SingleDataPointDetailsSetter::notifyApparentTemperature(double temperature)
 {
 	getInstance().setApparentTemperature(temperature);

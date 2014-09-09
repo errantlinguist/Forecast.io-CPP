@@ -28,7 +28,6 @@ class ParserManager: public common::Notifier<listeners::ForecastDetailsListener>
 {
 public:
     ParserManager(factories::ForecastFactory& listener, factories::FlagsFactory& flagsFactory);
-    virtual ~ParserManager();
 
     // Constant getters -----------------------------------------------------
     const NotifyingAlertParser& getNotifyingAlertParser() const

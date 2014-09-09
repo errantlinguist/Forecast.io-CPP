@@ -14,7 +14,7 @@ class AlertsListener
 {
 public:
 
-	virtual ~AlertsListener();
+	virtual ~AlertsListener() = default;
 
 	virtual void notifyAlert(Alert& alert);
 

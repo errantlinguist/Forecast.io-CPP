@@ -5,8 +5,6 @@ namespace forecast_io
 namespace listeners
 {
 
-ForecastDetailsListener::~ForecastDetailsListener() {}
-
 void ForecastDetailsListener::notifyLatitude(double latitude) {}
 void ForecastDetailsListener::notifyLongitude(double longitude) {}
 void ForecastDetailsListener::notifyTimezone(const std::string& timezone) {}

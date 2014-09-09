@@ -33,20 +33,3 @@ std::string RadialVelocity::str() const
 
 }
 
-/* namespace std
- {
-
- string to_string(const math::RadialVelocity& value)
- {
- return value.str();
- }
-
- }
-
- std::ostream& operator<<(std::ostream& o, const math::RadialVelocity& value)
- {
- return value.dump(o);
- }
-
-*/
-

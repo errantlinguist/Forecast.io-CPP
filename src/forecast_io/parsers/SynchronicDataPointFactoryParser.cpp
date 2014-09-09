@@ -15,11 +15,6 @@ SynchronicDataPointFactoryParser::SynchronicDataPointFactoryParser(factories::Sy
 {
 }
 
-SynchronicDataPointFactoryParser::~SynchronicDataPointFactoryParser()
-{
-}
-
-
 void SynchronicDataPointFactoryParser::parse(json_object* const & pJsonObj)
 {
 	NotifyingSynchronicDataPointParser::parse(pJsonObj);

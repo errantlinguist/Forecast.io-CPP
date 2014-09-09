@@ -16,8 +16,8 @@ public:
 	double precipitationAccumulation,
 		common::TimestampedValue<double> precipitationIntensityMax,
 		math::Range<time_t> dayLength,
-		math::Range<common::TimestampedValue<double> > temperature,
-		math::Range<common::TimestampedValue<double> > apparentTemperature);
+		math::Range<common::TimestampedValue<double>> temperature,
+		math::Range<common::TimestampedValue<double>> apparentTemperature);
 
 	// Constant getters ---------------------------------------------------------
 	const DataPoint& getBaseDataPoint() const
@@ -40,11 +40,11 @@ public:
 		return dayLength;
 	}
 
-	math::Range<common::TimestampedValue<double> > getTemperature() const
+	math::Range<common::TimestampedValue<double>> getTemperature() const
 	{
 		return temperature;
 	}
-	math::Range<common::TimestampedValue<double> > getApparentTemperature() const
+	math::Range<common::TimestampedValue<double>> getApparentTemperature() const
 	{
 		return apparentTemperature;
 	}
@@ -78,13 +78,13 @@ public:
 	}
 
 	void setTemperature(
-			math::Range<common::TimestampedValue<double> > temperature)
+			math::Range<common::TimestampedValue<double>> temperature)
 	{
 		this->temperature = temperature;
 	}
 
 	void setApparentTemperature(
-			math::Range<common::TimestampedValue<double> > apparentTemperature)
+			math::Range<common::TimestampedValue<double>> apparentTemperature)
 	{
 		this->apparentTemperature = apparentTemperature;
 	}
@@ -99,8 +99,8 @@ private:
 	double precipitationAccumulation;
 	common::TimestampedValue<double> precipitationIntensityMax;
 
-	math::Range<common::TimestampedValue<double> > temperature;
-	math::Range<common::TimestampedValue<double> > apparentTemperature;
+	math::Range<common::TimestampedValue<double>> temperature;
+	math::Range<common::TimestampedValue<double>> apparentTemperature;
 
 };
 

@@ -6,11 +6,6 @@ namespace forecast_io
 namespace factories
 {
 
-SynchronicDataPointFactory::~SynchronicDataPointFactory()
-{
-
-}
-
 SynchronicDataPoint SynchronicDataPointFactory::create()
 {
 	result.setBaseDataPoint(singleDataPointFactory.create());

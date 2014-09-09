@@ -14,11 +14,6 @@ namespace forecast_io
 namespace writers
 {
 
-FlagsConsoleWriter::~FlagsConsoleWriter()
-{
-
-}
-
 void FlagsConsoleWriter::write(const Flags& value, std::ostream& output)
 {
 	output << "Measurement system: ";

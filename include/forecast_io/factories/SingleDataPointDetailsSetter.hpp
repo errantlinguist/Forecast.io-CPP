@@ -19,7 +19,6 @@ class SingleDataPointDetailsSetter :
 {
 public:
 	SingleDataPointDetailsSetter(SingleDataPoint& instance);
-	virtual ~SingleDataPointDetailsSetter();
 
 	virtual void notifyApparentTemperature(double temperature);
 	virtual void notifyCloudCover(double cloudCover);

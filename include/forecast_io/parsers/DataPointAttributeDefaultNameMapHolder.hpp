@@ -28,8 +28,6 @@ public:
 
 private:
 
-	DataPointAttributeDefaultNameMapHolder() {}
-
 	static std::unique_ptr<DataPointAttributeNameMap> pInstance;
 
 	static std::unique_ptr<DataPointAttributeNameMap> createInstance();

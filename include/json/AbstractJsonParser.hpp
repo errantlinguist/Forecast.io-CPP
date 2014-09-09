@@ -11,11 +11,7 @@ class AbstractJsonParser
 {
 public:
 
-    AbstractJsonParser();
-    AbstractJsonParser(const AbstractJsonParser& copyee);
-    virtual ~AbstractJsonParser();
-
-    virtual AbstractJsonParser& operator= (const AbstractJsonParser& other);
+    virtual ~AbstractJsonParser() = default;
 
     virtual void parse(json_object* const & pJsonObj) = 0;
 

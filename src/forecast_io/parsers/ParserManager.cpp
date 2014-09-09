@@ -19,10 +19,5 @@ ParserManager::ParserManager(factories::ForecastFactory& listener, factories::Fl
 {
 }
 
-ParserManager::~ParserManager()
-{
-
-}
-
 }
 }

@@ -45,6 +45,5 @@ DataPoint::DataPoint(
 
 }
 
-
 }
 

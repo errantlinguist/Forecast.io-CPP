@@ -17,8 +17,6 @@ class FlagsConsoleWriter: public common::AbstractStreamWriter<Flags>
 
 public:
 
-	virtual ~FlagsConsoleWriter();
-
 	virtual void write(const Flags& value, std::ostream& output);
 };
 

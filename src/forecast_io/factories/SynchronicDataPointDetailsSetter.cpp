@@ -11,11 +11,6 @@ SynchronicDataPointDetailsSetter::SynchronicDataPointDetailsSetter(SynchronicDat
 {
 }
 
-SynchronicDataPointDetailsSetter::~SynchronicDataPointDetailsSetter()
-{
-}
-
-
 void SynchronicDataPointDetailsSetter::notifyApparentTemperature(double temperature)
 {
 	singleDataPointDetailsSetter.notifyApparentTemperature(temperature);

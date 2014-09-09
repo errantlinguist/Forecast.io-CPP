@@ -32,29 +32,6 @@ Flags::Flags(bool darkskyUnavailable,
 
 }
 
-Flags::Flags(const Flags& copyee) : Flags(copyee.isDarkskyUnavailable(), copyee.hasMetnoLicense(), copyee.getSources(), copyee.getStations(), copyee.getUnits())
-{
-}
-
-Flags::~Flags()
-{
-
-}
-
-Flags& Flags::operator= (const Flags& other)
-{
-	if (this != &other) // protect against invalid self-assignment
-	{
-		this->darkskyUnavailable = other.isDarkskyUnavailable();
-		this->metnoLicense = other.hasMetnoLicense();
-		this->sources = other.getSources();
-		this->stations = other.getStations();
-		this->units = other.getUnits();
-	}
-	// by convention, always return *this
-	return *this;
-}
-
 std::ostream& Flags::dump(std::ostream& o) const
 {
 	o << "Flags[hasMetnoLicense()=";

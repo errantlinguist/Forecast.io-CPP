@@ -56,10 +56,6 @@ SynchronicDataPointConsoleWriter::SynchronicDataPointConsoleWriter(int consoleWi
 {
 }
 
-SynchronicDataPointConsoleWriter::~SynchronicDataPointConsoleWriter()
-{
-}
-
 // Members ----------------------------------------------------------------------
 
 void SynchronicDataPointConsoleWriter::write(const SynchronicDataPoint& value, std::ostream& output)

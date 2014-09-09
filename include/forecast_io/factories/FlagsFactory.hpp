@@ -21,8 +21,6 @@ public:
 
 	FlagsFactory(math::MeasurementSystem defaultUnits);
 
-	virtual ~FlagsFactory();
-
 	virtual Flags create();
 
 	math::MeasurementSystem getDefaultUnits() const

@@ -12,7 +12,7 @@ class ForecastDetailsListener
 {
 public:
 
-	virtual ~ForecastDetailsListener();
+	virtual ~ForecastDetailsListener() = default;
 
 	virtual void notifyLatitude(double latitude);
 	virtual void notifyLongitude(double longitude);

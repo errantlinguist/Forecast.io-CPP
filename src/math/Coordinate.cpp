@@ -57,7 +57,7 @@ std::string Coordinate::createLongitudeString(double longitude)
 
 // Con-/destructors -------------------------------------------------------------
 
-Coordinate::Coordinate()
+Coordinate::Coordinate() : Coordinate(coord_t(0, 0))
 {
 }
 
@@ -66,26 +66,7 @@ Coordinate::Coordinate(coord_t coordinatePoint) :
 {
 }
 
-Coordinate::~Coordinate()
-{
-
-}
-
-Coordinate::Coordinate(const Coordinate& copyee) : Coordinate(copyee.getCoordinatePoint())
-{
-}
-
 // Instance members -------------------------------------------------------------
-
-Coordinate& Coordinate::operator= (const Coordinate& other)
-{
-	if (this != &other) // protect against invalid self-assignment
-	{
-		this->coordinatePoint = other.getCoordinatePoint();
-	}
-	// by convention, always return *this
-	return *this;
-}
 
 std::ostream& Coordinate::dump(std::ostream& o) const
 {

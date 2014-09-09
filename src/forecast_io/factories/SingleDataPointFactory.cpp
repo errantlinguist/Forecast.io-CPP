@@ -6,12 +6,6 @@ namespace forecast_io
 namespace factories
 {
 
-
-SingleDataPointFactory::~SingleDataPointFactory()
-{
-
-}
-
 SingleDataPoint SingleDataPointFactory::create()
 {
 	result.setBaseDataPoint(dataPointFactory.create());

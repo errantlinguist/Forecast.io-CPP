@@ -23,7 +23,7 @@ public:
 	{
 		return temperature;
 	}
-	
+
 	double getApparentTemperature() const
 	{
 		return apparentTemperature;
@@ -45,7 +45,7 @@ public:
 	{
 		this->temperature = temperature;
 	}
-	
+
 	void setApparentTemperature(double apparentTemperature)
 	{
 		this->apparentTemperature = apparentTemperature;

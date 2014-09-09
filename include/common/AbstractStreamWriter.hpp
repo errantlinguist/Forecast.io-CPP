@@ -11,7 +11,7 @@ class AbstractStreamWriter
 {
 public:
 
-	virtual ~AbstractStreamWriter() {}
+	virtual ~AbstractStreamWriter() = default;
 
 	virtual void write(const T& value, std::ostream& output) = 0;
 

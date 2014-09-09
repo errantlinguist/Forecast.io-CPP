@@ -14,7 +14,7 @@ class SingleDataPointDetailsListener: public forecast_io::listeners::DataPointDe
 
 public:
 
-	virtual ~SingleDataPointDetailsListener();
+	virtual ~SingleDataPointDetailsListener() = default;
 
 	virtual void notifyApparentTemperature(double temperature);
 	virtual void notifyTemperature(double temperature);

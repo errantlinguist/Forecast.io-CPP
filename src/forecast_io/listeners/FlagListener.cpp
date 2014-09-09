@@ -6,8 +6,6 @@ namespace forecast_io
 namespace listeners
 {
 
-FlagListener::~FlagListener() {}
-
 void FlagListener::notifyDarkskyUnavailable(bool darkskyUnavailable) {}
 void FlagListener::notifySources(std::unordered_set<std::string>& sources) {}
 void FlagListener::notifyStations(

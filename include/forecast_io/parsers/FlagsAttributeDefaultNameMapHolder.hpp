@@ -28,8 +28,6 @@ public:
 
 private:
 
-	FlagsAttributeDefaultNameMapHolder() {}
-
 	static std::unique_ptr<FlagsAttributeNameMap> pInstance;
 
 	static std::unique_ptr<FlagsAttributeNameMap> createInstance();

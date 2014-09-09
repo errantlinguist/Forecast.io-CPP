@@ -5,8 +5,6 @@ namespace forecast_io
 namespace listeners
 {
 
-DataPointDetailsListener::~DataPointDetailsListener() {}
-
 void DataPointDetailsListener::notifyCloudCover(double cloudCover) {}
 void DataPointDetailsListener::notifyDewPoint(double dewPoint) {}
 void DataPointDetailsListener::notifyHumidity(double humidity) {}

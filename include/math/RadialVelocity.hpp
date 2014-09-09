@@ -13,18 +13,7 @@ public:
 	RadialVelocity() : RadialVelocity(0, 0) {}
 	RadialVelocity(double magnitude, double direction);
 	RadialVelocity(const RadialVelocity& copyee) : RadialVelocity(copyee.magnitude, copyee.direction) { }
-	virtual ~RadialVelocity() {}
-
-	virtual RadialVelocity& operator= (const RadialVelocity& other)
-	{
-		if (this != &other) // protect against invalid self-assignment
-		{
-			this->magnitude = other.getMagnitude();
-			this->direction = other.getDirection();
-		}
-		// by convention, always return *this
-		return *this;
-	}
+	virtual ~RadialVelocity() = default;
 
 	virtual std::ostream& dump(std::ostream& o) const;
 	virtual std::string str() const;
@@ -59,16 +48,5 @@ private:
 };
 
 }
-
-/*namespace std
-{
-
-string to_string(const math::RadialVelocity& value);
-
-}
-
-std::ostream& operator<<(std::ostream& o, const math::RadialVelocity& value);
-
-*/
 
 #endif // RADIALVELOCITY_HPP

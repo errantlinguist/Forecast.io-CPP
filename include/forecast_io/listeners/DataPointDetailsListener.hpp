@@ -13,7 +13,7 @@ class DataPointDetailsListener
 {
 public:
 
-	virtual ~DataPointDetailsListener();
+	virtual ~DataPointDetailsListener() = default;
 
 	virtual void notifyCloudCover(double cloudCover);
 	virtual void notifyDewPoint(double dewPoint);

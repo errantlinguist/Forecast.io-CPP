@@ -13,10 +13,7 @@ public:
 
 	DataOverview();
 	DataOverview(std::string summary, std::string iconName);
-	DataOverview(const DataOverview& copyee);
-	virtual ~DataOverview();
-
-	virtual DataOverview& operator= (const DataOverview& other);
+	virtual ~DataOverview() = default;
 
 	virtual std::ostream& dump(std::ostream& o) const;
 	virtual std::string str() const;

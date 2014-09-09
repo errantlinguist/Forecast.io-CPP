@@ -25,11 +25,6 @@ ForecastConsoleWriter::ForecastConsoleWriter(int consoleWidth) :
 
 }
 
-ForecastConsoleWriter::~ForecastConsoleWriter()
-{
-
-}
-
 // Members ----------------------------------------------------------------------
 
 void ForecastConsoleWriter::write(const Forecast& value, std::ostream& output)

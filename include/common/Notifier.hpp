@@ -13,10 +13,7 @@ public:
 	{
 	}
 
-	virtual ~Notifier()
-	{
-
-	}
+	virtual ~Notifier() = default;
 
 	N* getListener()
 	{

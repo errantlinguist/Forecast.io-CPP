@@ -14,8 +14,6 @@ class SynchronicDataPointDetailsListener: public forecast_io::listeners::SingleD
 
 public:
 
-	virtual ~SynchronicDataPointDetailsListener();
-
 	virtual void notifyNearestStormBearing(double bearing);
 	virtual void notifyNearestStormDistance(double distance);
 };

@@ -22,11 +22,6 @@ public:
 
 	}
 
-	virtual ~InstanceHolder()
-	{
-
-	}
-
 	const T& getInstance() const
 	{
 		return instance;

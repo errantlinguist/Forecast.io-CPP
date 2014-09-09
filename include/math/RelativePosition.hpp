@@ -8,9 +8,7 @@ template<typename B, typename D>
 class RelativePosition
 {
 public:
-	RelativePosition()
-	{
-	}
+	RelativePosition() = default;
 
 	RelativePosition(B bearing, D distance) :
 		bearing(bearing), distance(distance)

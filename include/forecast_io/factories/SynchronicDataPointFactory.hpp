@@ -18,8 +18,6 @@ class SynchronicDataPointFactory: public common::AbstractFactory<SynchronicDataP
 {
 public:
 
-	virtual ~SynchronicDataPointFactory();
-
 	SynchronicDataPoint create();
 
 	const SingleDataPointFactory& getSingleDataPointFactory() const
