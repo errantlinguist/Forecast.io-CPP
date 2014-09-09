@@ -24,5 +24,5 @@ To do
 * Add callbacks for [forecast data blocks](https://developer.forecast.io/docs/v2#data-blocks)
 * Improve build process: E.g. use CMake instead of writing makefile manually
 * Add console-writing functionalities for as-yet-unimplemented callbacks
-* Move the classes under `forecast_io/writers` and any other classes used only by the demo program to `console_weather`
+* Make demo program support printing out SI measurements as well
 * Make demo writer classes wrap data at terminal edge
