@@ -27,51 +27,29 @@ namespace parsers
 class ParserManager: public common::Notifier<listeners::ForecastDetailsListener>
 {
 public:
-    ParserManager(factories::ForecastFactory& listener, factories::FlagsFactory& flagsFactory);
+    ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory);
 
     // Constant getters -----------------------------------------------------
-    const NotifyingAlertParser& getNotifyingAlertParser() const
-    {
-        return alertParser;
-    }
+    virtual const NotifyingAlertParser& getNotifyingAlertParser() const;
 
-    const AlertsFactoryParser& getAlertsParser() const
-    {
-        return alertsParser;
-    }
+    virtual const AlertsFactoryParser& getAlertsParser() const;
 
-    const NotifyingSynchronicDataPointParser& getSynchronicDataPointParser() const
-    {
-        return synchronicDataPointParser;
-    }
+    virtual const NotifyingSynchronicDataPointParser& getSynchronicDataPointParser() const;
 
-    const NotifyingForecastParser& getForecastParser() const
-    {
-        return forecastParser;
-    }
+    virtual const NotifyingForecastParser& getForecastParser() const;
 
     // Non-constant getters -----------------------------------------------------
-    NotifyingAlertParser& getNotifyingAlertParser()
-    {
-        return alertParser;
-    }
+    virtual NotifyingAlertParser& getNotifyingAlertParser();
 
-    AlertsFactoryParser& getAlertsParser()
-    {
-        return alertsParser;
-    }
+    virtual AlertsFactoryParser& getAlertsParser();
 
-    NotifyingSynchronicDataPointParser& getSynchronicDataPointParser()
-    {
-        return synchronicDataPointParser;
-    }
+    virtual NotifyingSynchronicDataPointParser& getSynchronicDataPointParser();
 
-    NotifyingForecastParser& getForecastParser()
-    {
-        return forecastParser;
-    }
+    virtual NotifyingForecastParser& getForecastParser();
 
 private:
+
+	ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory, factories::AlertFactory* pAlertFactory);
 
     factories::AlertFactory alertFactory;
     NotifyingAlertParser alertParser;

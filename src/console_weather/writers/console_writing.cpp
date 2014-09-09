@@ -1,10 +1,10 @@
-#include "forecast_io/writers/console_writing.hpp"
+#include "console_weather/writers/console_writing.hpp"
 
 #include <cassert>
 #include <iomanip>
 #include <limits>
 
-namespace forecast_io
+namespace console_weather
 {
 namespace writers
 {

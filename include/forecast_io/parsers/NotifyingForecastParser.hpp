@@ -36,7 +36,7 @@ class NotifyingForecastParser: public json::AbstractJsonStateMapParser<
 {
 public:
 
-	NotifyingForecastParser(listeners::ForecastDetailsListener& listener,
+	NotifyingForecastParser(listeners::ForecastDetailsListener* pListener,
 			json::JsonArrayParser<NotifyingAlertParser>& alertsParser,
 			AbstractJsonParser& flagParser,
 			NotifyingSynchronicDataPointParser& synchronicDataPointParser,

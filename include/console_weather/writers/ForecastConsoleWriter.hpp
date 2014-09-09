@@ -1,30 +1,31 @@
 #ifndef FORECASTCONSOLEWRITER_HPP
 #define FORECASTCONSOLEWRITER_HPP
 
-#include "../../common/AbstractStreamWriter.hpp" // Base class: AbstractStreamWriter
-
 #include <string>
 
 #include "AlertConsoleWriter.hpp"
 #include "FlagsConsoleWriter.hpp"
 #include "SynchronicDataPointConsoleWriter.hpp"
 
+// Forward declarations
 namespace forecast_io
 {
 
-// Forward declarations
 class Forecast;
+}
 
+namespace console_weather
+{
 namespace writers
 {
 
-class ForecastConsoleWriter: public common::AbstractStreamWriter<Forecast>
+class ForecastConsoleWriter
 {
 public:
 
 	ForecastConsoleWriter(int consoleWidth);
 
-	void write(const Forecast& value, std::ostream& output);
+	void write(const forecast_io::Forecast& value, std::ostream& output);
 
 private:
 
@@ -43,7 +44,6 @@ private:
 };
 
 }
-
 }
 
 #endif // FORECASTCONSOLEWRITER_HPP

@@ -1,16 +1,15 @@
-#include "forecast_io/writers/ForecastConsoleWriter.hpp"
+#include "console_weather/writers/ForecastConsoleWriter.hpp"
 
 #include <iomanip>
 #include <vector>
 
+#include "console_weather/writers/console_writing.hpp"
 #include "forecast_io/Alert.hpp"
 #include "forecast_io/Forecast.hpp"
-#include "forecast_io/writers/console_writing.hpp"
 #include "math/Coordinate.hpp"
 
-namespace forecast_io
+namespace console_weather
 {
-
 namespace writers
 {
 
@@ -27,7 +26,7 @@ ForecastConsoleWriter::ForecastConsoleWriter(int consoleWidth) :
 
 // Members ----------------------------------------------------------------------
 
-void ForecastConsoleWriter::write(const Forecast& value, std::ostream& output)
+void ForecastConsoleWriter::write(const forecast_io::Forecast& value, std::ostream& output)
 {
 	output << "Forecast for location at coordinates ";
 	// FIXME: The coordinate values are always zero here
@@ -44,7 +43,7 @@ void ForecastConsoleWriter::write(const Forecast& value, std::ostream& output)
 	output << " hrs.)\n";
 
 	// Alerts
-	const std::vector<Alert>& alerts = value.getAlerts();
+	const std::vector<forecast_io::Alert>& alerts = value.getAlerts();
 	if (!alerts.empty())
 	{
 		output << alertsSectionHeader << '\n';
@@ -53,7 +52,7 @@ void ForecastConsoleWriter::write(const Forecast& value, std::ostream& output)
 
 	// Current forecast data
 	output << currentWeatherSectionHeader << '\n';
-	const SynchronicDataPoint& currentWeather = value.getCurrentWeather();
+	const forecast_io::SynchronicDataPoint& currentWeather = value.getCurrentWeather();
 	synchronicDataPointWriter.write(currentWeather, output);
 	output << '\n';
 
@@ -66,7 +65,7 @@ void ForecastConsoleWriter::write(const Forecast& value, std::ostream& output)
 template<typename C>
 void ForecastConsoleWriter::write(const C& alerts, std::ostream& output)
 {
-	for (const Alert& alert : alerts)
+	for (const forecast_io::Alert& alert : alerts)
 	{
 		alertWriter.write(alert, output);
 		output << '\n';
@@ -74,6 +73,5 @@ void ForecastConsoleWriter::write(const C& alerts, std::ostream& output)
 }
 
 }
-
 }
 

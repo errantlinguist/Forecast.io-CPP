@@ -12,8 +12,10 @@ class RadialVelocity
 public:
 	RadialVelocity() : RadialVelocity(0, 0) {}
 	RadialVelocity(double magnitude, double direction);
-	RadialVelocity(const RadialVelocity& copyee) : RadialVelocity(copyee.magnitude, copyee.direction) { }
+	RadialVelocity(const RadialVelocity& copyee) = default;
 	virtual ~RadialVelocity() = default;
+
+	virtual RadialVelocity& operator= (const RadialVelocity& other) = default;
 
 	virtual std::ostream& dump(std::ostream& o) const;
 	virtual std::string str() const;

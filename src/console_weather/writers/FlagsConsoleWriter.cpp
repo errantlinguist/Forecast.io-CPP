@@ -1,23 +1,19 @@
-#include "forecast_io/writers/FlagsConsoleWriter.hpp"
+#include "console_weather/writers/FlagsConsoleWriter.hpp"
 
 #include "common/to_string.hpp"
 #include "common/unordered_multimap.hpp"
 #include "forecast_io/Flags.hpp"
 #include "forecast_io/MeasurementSystemDefaultNameArrayHolder.hpp"
 
-#include <array>
-#include <unordered_set>
-
-namespace forecast_io
+namespace console_weather
 {
-
 namespace writers
 {
 
-void FlagsConsoleWriter::write(const Flags& value, std::ostream& output)
+void FlagsConsoleWriter::write(const forecast_io::Flags& value, std::ostream& output)
 {
 	output << "Measurement system: ";
-	static const MeasurementSystemNameArray& measurementNames = *MeasurementSystemDefaultNameArrayHolder::getInstance();
+	static const forecast_io::MeasurementSystemNameArray& measurementNames = *forecast_io::MeasurementSystemDefaultNameArrayHolder::getInstance();
 	const std::string measurementName =
 			measurementNames[static_cast<size_t>(value.getUnits())];
 	output << measurementName << '\n';
@@ -42,6 +38,5 @@ void FlagsConsoleWriter::write(const Flags& value, std::ostream& output)
 }
 
 }
-
 }
 

@@ -1,6 +1,8 @@
 #ifndef NOTIFIER_HPP
 #define NOTIFIER_HPP
 
+#include <unordered_set>
+
 namespace common
 {
 
@@ -8,31 +10,31 @@ template<typename N>
 class Notifier
 {
 public:
-	Notifier(N& listener) :
-			pListener(&listener)
+	Notifier() = default;
+
+	Notifier(N* pListener) : Notifier(std::unordered_set<N*>({pListener}))
+	{
+	}
+
+	Notifier(std::unordered_set<N*> listeners) : listeners(listeners)
 	{
 	}
 
 	virtual ~Notifier() = default;
 
-	N* getListener()
+	std::unordered_set<N*>& getListeners()
 	{
-		return pListener;
+		return listeners;
 	}
 
-	const N* getListener() const
+	const std::unordered_set<N*>& getListeners() const
 	{
-		return pListener;
-	}
-
-	virtual void setListener(N& listener)
-	{
-		this->pListener = &listener;
+		return listeners;
 	}
 
 private:
 
-	N* pListener;
+	std::unordered_set<N*> listeners;
 
 };
 

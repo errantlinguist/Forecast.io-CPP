@@ -25,7 +25,7 @@ class NotifyingSynchronicDataPointParser: public json::AbstractJsonStateMapParse
 {
 public:
 	NotifyingSynchronicDataPointParser(
-			listeners::SynchronicDataPointDetailsListener& listener,
+			listeners::SynchronicDataPointDetailsListener* pListener,
 			const DataPointAttributeNameMap& attributeNames =
 					*DataPointAttributeDefaultNameMapHolder::getInstance());
 

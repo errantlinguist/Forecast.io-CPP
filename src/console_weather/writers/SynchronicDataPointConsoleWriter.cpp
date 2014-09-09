@@ -1,13 +1,12 @@
-#include "forecast_io/writers/SynchronicDataPointConsoleWriter.hpp"
+#include "console_weather/writers/SynchronicDataPointConsoleWriter.hpp"
 
 #include <ctime>
 
+#include "console_weather/writers/console_writing.hpp"
 #include "forecast_io/SynchronicDataPoint.hpp"
-#include "forecast_io/writers/console_writing.hpp"
 
-namespace forecast_io
+namespace console_weather
 {
-
 namespace writers
 {
 
@@ -25,7 +24,7 @@ static void write(const math::RelativePosition<B, D>& value, std::ostream& outpu
 	output << "Distance: " << value.getDistance() << ' ' << DISTANCE_UNITS << '\n';
 }
 
-static void write(const Precipitation& value, std::ostream& output)
+static void write(const forecast_io::Precipitation& value, std::ostream& output)
 {
 	output << "Intensity: " << value.getIntensity() << '\n';
 	output << "Probability: " << value.getProbability() << '\n';
@@ -58,9 +57,9 @@ SynchronicDataPointConsoleWriter::SynchronicDataPointConsoleWriter(int consoleWi
 
 // Members ----------------------------------------------------------------------
 
-void SynchronicDataPointConsoleWriter::write(const SynchronicDataPoint& value, std::ostream& output)
+void SynchronicDataPointConsoleWriter::write(const forecast_io::SynchronicDataPoint& value, std::ostream& output)
 {
-	const SingleDataPoint& baseDataPoint = value.getBaseDataPoint();
+	const forecast_io::SingleDataPoint& baseDataPoint = value.getBaseDataPoint();
 	write(baseDataPoint, output);
 	const math::RelativePosition<double, double>& nearestStorm = value.getNearestStorm();
 	output << nearestStormSectionHeader << '\n';
@@ -68,14 +67,14 @@ void SynchronicDataPointConsoleWriter::write(const SynchronicDataPoint& value, s
 	output << headerRowSeparator << '\n';
 }
 
-void SynchronicDataPointConsoleWriter::write(const DataPoint& value, std::ostream& output)
+void SynchronicDataPointConsoleWriter::write(const forecast_io::DataPoint& value, std::ostream& output)
 {
 	output << "Time: ";
 	const time_t time = value.getTime();
 	timeWriter.write(time, output);
 	output << '\n';
 
-	const DataOverview& overview = value.getOverview();
+	const forecast_io::DataOverview& overview = value.getOverview();
 	output << "Summary: " << overview.getSummary() << '\n';
 	output << headerRowSeparator << '\n';
 	// TODO: Finish console writer for DataPoint
@@ -84,7 +83,7 @@ void SynchronicDataPointConsoleWriter::write(const DataPoint& value, std::ostrea
 	output << "Humidity: " << value.getHumidity() << '\n';
 	output << "Ozone: " << value.getOzone() << ' ' << AREA_DENSITY_UNITS << '\n';
 
-	const Precipitation& precipitation = value.getPrecipitation();
+	const forecast_io::Precipitation& precipitation = value.getPrecipitation();
 	output << precipitationSectionHeader << '\n';
 	writers::write(precipitation, output);
 	output << headerRowSeparator << '\n';
@@ -98,9 +97,9 @@ void SynchronicDataPointConsoleWriter::write(const DataPoint& value, std::ostrea
 	output << headerRowSeparator << '\n';
 }
 
-void SynchronicDataPointConsoleWriter::write(const SingleDataPoint& value, std::ostream& output)
+void SynchronicDataPointConsoleWriter::write(const forecast_io::SingleDataPoint& value, std::ostream& output)
 {
-	const DataPoint& baseDataPoint = value.getBaseDataPoint();
+	const forecast_io::DataPoint& baseDataPoint = value.getBaseDataPoint();
 	write(baseDataPoint, output);
 	output << "Temperature: " << value.getTemperature() << DEGREE_SYMBOL << ' ' << TEMPERATURE_UNITS << '\n';
 	output << "Apparent temperature: " << value.getApparentTemperature() << DEGREE_SYMBOL << ' ' << TEMPERATURE_UNITS << '\n';
@@ -113,6 +112,5 @@ void SynchronicDataPointConsoleWriter::write(const time_t value, std::ostream& o
 
 
 }
-
 }
 

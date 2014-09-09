@@ -1,13 +1,12 @@
-#include "forecast_io/writers/AlertConsoleWriter.hpp"
+#include "console_weather/writers/AlertConsoleWriter.hpp"
 
 #include <sstream>
 
+#include "console_weather/writers/console_writing.hpp"
 #include "forecast_io/Alert.hpp"
-#include "forecast_io/writers/console_writing.hpp"
 
-namespace forecast_io
+namespace console_weather
 {
-
 namespace writers
 {
 
@@ -20,7 +19,7 @@ AlertConsoleWriter::AlertConsoleWriter(int consoleWidth) :
 
 // Members ----------------------------------------------------------------------
 
-void AlertConsoleWriter::write(const Alert& value, std::ostream& output)
+void AlertConsoleWriter::write(const forecast_io::Alert& value, std::ostream& output)
 {
 	output << value.getTitle() << '\n';
 	output << headerSeparator << '\n';
@@ -29,6 +28,5 @@ void AlertConsoleWriter::write(const Alert& value, std::ostream& output)
 }
 
 }
-
 }
 

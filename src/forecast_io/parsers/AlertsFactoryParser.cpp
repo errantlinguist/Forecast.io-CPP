@@ -11,20 +11,23 @@ namespace forecast_io
 namespace parsers
 {
 
-AlertsFactoryParser::AlertsFactoryParser(listeners::AlertsListener& listener,
-		NotifyingAlertParser& alertParser,
-		factories::AlertFactory& factory) :
-		JsonArrayParser(alertParser), Notifier(listener), factory(
-				factory)
+AlertsFactoryParser::AlertsFactoryParser(listeners::AlertsListener* pListener,
+        NotifyingAlertParser& alertParser,
+        factories::AlertFactory* pFactory) :
+    JsonArrayParser(alertParser), Notifier(pListener), factory(
+        *pFactory)
 {
-	getElementParser().setListener(factory);
+    getElementParser().getListeners().insert(pFactory);
 }
 
 void AlertsFactoryParser::handleArrayElement(json_object* const & arrayElement)
 {
-	json::JsonArrayParser<NotifyingAlertParser>::handleArrayElement(arrayElement);
-	Alert alert = factory.create();
-	getListener()->notifyAlert(alert);
+    json::JsonArrayParser<NotifyingAlertParser>::handleArrayElement(arrayElement);
+    Alert alert = factory.create();
+    for (listeners::AlertsListener* pListener : getListeners())
+    {
+        pListener->notifyAlert(alert);
+    }
 }
 
 }

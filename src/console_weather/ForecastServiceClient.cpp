@@ -61,7 +61,7 @@ std::unique_ptr<forecast_io::Forecast> ForecastServiceClient::get(const char* ur
     std::unique_ptr<forecast_io::factories::FlagsFactory> pFlagsFactory(
         new forecast_io::factories::FlagsFactory(measurementUnits));
     std::unique_ptr<forecast_io::parsers::ParserManager> pParserManager(
-        new forecast_io::parsers::ParserManager(*pForecastFactory, *pFlagsFactory));
+        new forecast_io::parsers::ParserManager(pForecastFactory.get(), pFlagsFactory.get()));
 
     forecast_io::parsers::NotifyingForecastParser& forecastParser =
         pParserManager->getForecastParser();

@@ -16,7 +16,10 @@ public:
 	Alert();
 	Alert(std::string title, time_t expiryTime, std::string description,
 			std::string uri);
+	Alert(const Alert& copyee) = default;
 	virtual ~Alert() = default;
+
+	virtual Alert& operator= (const Alert& other) = default;
 
 	virtual bool operator==(const Alert& other) const
 	{

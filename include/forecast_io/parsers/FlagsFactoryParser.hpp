@@ -29,8 +29,8 @@ class NotifyingFlagParser;
 class FlagsFactoryParser: public NotifyingFlagParser
 {
 public:
-	FlagsFactoryParser(listeners::FlagsListener& listener,
-			factories::FlagsFactory& factory);
+	FlagsFactoryParser(listeners::FlagsListener* pListener,
+			factories::FlagsFactory* pFactory);
 
 	listeners::FlagsListener* getListener()
 	{
@@ -45,7 +45,7 @@ public:
 	virtual void parse(json_object* const & pJsonObj);
 
 private:
-	factories::FlagsFactory& factory;
+	factories::FlagsFactory* pFactory;
 	listeners::FlagsListener* pListener;
 
 };

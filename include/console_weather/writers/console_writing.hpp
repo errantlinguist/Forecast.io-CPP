@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-namespace forecast_io
+namespace console_weather
 {
 namespace writers
 {

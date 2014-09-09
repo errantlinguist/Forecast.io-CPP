@@ -21,14 +21,14 @@ namespace console_weather
 class ForecastStreamReader
 {
 public:
-    ForecastStreamReader(math::MeasurementSystem measurementUnits, size_t readBufferSize);
+    ForecastStreamReader(math::MeasurementSystem measurementUnits, int readBufferSize);
 
     std::unique_ptr<forecast_io::Forecast> read(std::istream& input);
 
 private:
     math::MeasurementSystem measurementUnits;
     std::unique_ptr<char[]> pBuffer;
-    size_t readBufferSize;
+    int readBufferSize;
 };
 
 }

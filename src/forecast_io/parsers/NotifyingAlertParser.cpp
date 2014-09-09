@@ -26,9 +26,9 @@ static AlertAttributeNameMap createDefaultAttributeNameMap()
 
 // Con-/destructors -------------------------------------------------------------
 
-NotifyingAlertParser::NotifyingAlertParser(listeners::AlertDetailsListener& listener,
+NotifyingAlertParser::NotifyingAlertParser(listeners::AlertDetailsListener* pListener,
 		const AlertAttributeNameMap& attributeNames) :
-		AbstractJsonStateMapParser(attributeNames), Notifier(listener)
+		AbstractJsonStateMapParser(attributeNames), Notifier(pListener)
 {
 }
 
@@ -44,26 +44,38 @@ void NotifyingAlertParser::parseAttribute(const AlertAttribute& attribute,
 	case AlertAttribute::DESCRIPTION:
 	{
 		const std::string description(json_object_get_string(pValue));
-		getListener()->notifyDescription(description);
+		for (listeners::AlertDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyDescription(description);
+		}
 		break;
 	}
 	case AlertAttribute::EXPIRY_TIME:
 	{
 		const time_t expiryTime(
 				static_cast<time_t>(json_object_get_int64(pValue)));
-		getListener()->notifyExpiryTime(expiryTime);
+		for (listeners::AlertDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyExpiryTime(expiryTime);
+		}
 		break;
 	}
 	case AlertAttribute::TITLE:
 	{
 		const std::string title(json_object_get_string(pValue));
-		getListener()->notifyTitle(title);
+		for (listeners::AlertDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyTitle(title);
+		}
 		break;
 	}
 	case AlertAttribute::URI:
 	{
 		const std::string uri(json_object_get_string(pValue));
-		getListener()->notifyUri(uri);
+		for (listeners::AlertDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyUri(uri);
+		}
 		break;
 	}
 	default:

@@ -37,12 +37,12 @@ static ForecastAttributeNameMap createDefaultAttributeNameMap()
 // Con-/destructors -------------------------------------------------------------
 
 NotifyingForecastParser::NotifyingForecastParser(
-		listeners::ForecastDetailsListener& listener,
+		listeners::ForecastDetailsListener* pListener,
 		json::JsonArrayParser<NotifyingAlertParser>& alertsParser,
 		AbstractJsonParser& flagParser,
 		NotifyingSynchronicDataPointParser& synchronicDataPointParser,
 		const ForecastAttributeNameMap& attributeNames) :
-		AbstractJsonStateMapParser(attributeNames), Notifier(listener), alertsParser(
+		AbstractJsonStateMapParser(attributeNames), Notifier(pListener), alertsParser(
 				alertsParser), flagParser(flagParser), synchronicDataPointParser(
 				synchronicDataPointParser)
 {
@@ -85,13 +85,19 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	case ForecastAttribute::LATITUDE:
 	{
 		const double latitude(json_object_get_double(pValue));
-		getListener()->notifyLatitude(latitude);
+		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyLatitude(latitude);
+		}
 		break;
 	}
 	case ForecastAttribute::LONGITUDE:
 	{
 		const double longitude(json_object_get_double(pValue));
-		getListener()->notifyLongitude(longitude);
+		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyLongitude(longitude);
+		}
 		break;
 	}
 	case ForecastAttribute::MINUTELY:
@@ -103,13 +109,19 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	{
 		const signed char offset(
 				static_cast<signed char>(json_object_get_int64(pValue)));
-		getListener()->notifyOffset(offset);
+		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyOffset(offset);
+		}
 		break;
 	}
 	case ForecastAttribute::TIMEZONE:
 	{
 		const std::string timezone(json_object_get_string(pValue));
-		getListener()->notifyTimezone(timezone);
+		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		{
+			pListener->notifyTimezone(timezone);
+		}
 		break;
 	}
 	default:

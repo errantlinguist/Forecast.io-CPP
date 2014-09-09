@@ -11,6 +11,7 @@
 #include "console/dimensions.hpp"
 #include "console_weather/ForecastServiceClient.hpp"
 #include "console_weather/ForecastStreamReader.hpp"
+#include "console_weather/writers/ForecastConsoleWriter.hpp"
 #include "curl/reading.hpp"
 #include "forecast_io/Flags.hpp"
 #include "forecast_io/Forecast.hpp"
@@ -19,12 +20,11 @@
 #include "forecast_io/parsers/NotifyingFlagParser.hpp"
 #include "forecast_io/parsers/NotifyingForecastParser.hpp"
 #include "forecast_io/parsers/ParserManager.hpp"
-#include "forecast_io/writers/ForecastConsoleWriter.hpp"
 #include "json/TokenerParser.hpp"
 #include "json/ParseError.hpp"
 
 static constexpr math::MeasurementSystem DEFAULT_MEASUREMENT_UNITS = math::MeasurementSystem::SI;
-static constexpr size_t DEFAULT_READ_BUFFER_SIZE = 64 * 1024;
+static constexpr int DEFAULT_READ_BUFFER_SIZE = 64 * 1024;
 
 static std::string createUsageMessage(const char* const& executable)
 {
@@ -36,7 +36,7 @@ static std::string createUsageMessage(const char* const& executable)
 static void print(forecast_io::Forecast& forecast)
 {
 	const console::Dimensions consoleDimensions = console::getDimensions();
-	forecast_io::writers::ForecastConsoleWriter forecastWriter(consoleDimensions.width);
+	console_weather::writers::ForecastConsoleWriter forecastWriter(consoleDimensions.width);
 	forecastWriter.write(forecast, std::cout);
 }
 

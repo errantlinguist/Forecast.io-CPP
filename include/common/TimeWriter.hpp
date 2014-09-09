@@ -2,17 +2,19 @@
 #define TIMEWRITER_HPP
 
 #include <ctime>
-
-#include "AbstractStreamWriter.hpp" // Base class: common::AbstractStreamWriter
+#include <ostream>
 
 namespace common
 {
 
-class TimeWriter : public common::AbstractStreamWriter<time_t>
+class TimeWriter
 {
 public:
 	TimeWriter(const char* format, size_t maxLength);
+	TimeWriter(const TimeWriter& copyee) = default;
 	virtual ~TimeWriter() = default;
+
+	virtual TimeWriter& operator= (const TimeWriter& other) = default;
 
 	virtual void write(const time_t& value, std::ostream& output);
 

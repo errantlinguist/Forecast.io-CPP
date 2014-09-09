@@ -9,9 +9,9 @@ namespace forecast_io
 namespace parsers
 {
 
-SynchronicDataPointFactoryParser::SynchronicDataPointFactoryParser(factories::SynchronicDataPointFactory& factory) :
-	NotifyingSynchronicDataPointParser(factory),
-	factory(factory)
+SynchronicDataPointFactoryParser::SynchronicDataPointFactoryParser(factories::SynchronicDataPointFactory* pFactory) :
+	NotifyingSynchronicDataPointParser(pFactory),
+	factory(*pFactory)
 {
 }
 

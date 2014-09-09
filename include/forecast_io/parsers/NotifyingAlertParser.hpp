@@ -22,7 +22,7 @@ class NotifyingAlertParser: public json::AbstractJsonStateMapParser<
 		AlertAttribute>, public common::Notifier<listeners::AlertDetailsListener>
 {
 public:
-	NotifyingAlertParser(listeners::AlertDetailsListener& listener,
+	NotifyingAlertParser(listeners::AlertDetailsListener* pListener,
 			const AlertAttributeNameMap& attributeNames =
 					DEFAULT_ATTRIBUTE_NAMES);
 

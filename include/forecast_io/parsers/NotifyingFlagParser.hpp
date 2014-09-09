@@ -33,7 +33,7 @@ class NotifyingFlagParser: public json::AbstractJsonStateMapParser<
 		FlagsAttribute>, public common::Notifier<listeners::FlagListener>
 {
 public:
-	NotifyingFlagParser(listeners::FlagListener& listener,
+	NotifyingFlagParser(listeners::FlagListener* pListener,
 			const FlagsAttributeNameMap& attributeNames =
 					*FlagsAttributeDefaultNameMapHolder::getInstance(),
 			const MeasurementSystemAttributeValueMap& measurementSystemAttributeValues =

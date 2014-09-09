@@ -1,26 +1,27 @@
 #ifndef ALERTCONSOLEWRITER_HPP
 #define ALERTCONSOLEWRITER_HPP
 
-#include "../../common/AbstractStreamWriter.hpp" // Base class: AbstractStreamWriter
-
 #include <string>
 
+// Forward declarations
 namespace forecast_io
 {
 
-// Forward declarations
 class Alert;
+}
 
+namespace console_weather
+{
 namespace writers
 {
 
-class AlertConsoleWriter: public common::AbstractStreamWriter<Alert>
+class AlertConsoleWriter
 {
 public:
 
 	AlertConsoleWriter(int consoleWidth);
 
-	void write(const Alert& value, std::ostream& output);
+	void write(const forecast_io::Alert& value, std::ostream& output);
 
 private:
 
@@ -29,7 +30,7 @@ private:
 };
 
 }
-
 }
+
 
 #endif // ALERTCONSOLEWRITER_HPP
