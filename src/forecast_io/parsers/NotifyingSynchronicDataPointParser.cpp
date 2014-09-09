@@ -25,7 +25,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case APPARENT_TEMPERATURE:
 	{
 		const double apparentTemperature(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyApparentTemperature(apparentTemperature);
 		}
@@ -34,7 +34,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case CLOUD_COVER:
 	{
 		const double cloudCover(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyCloudCover(cloudCover);
 		}
@@ -43,7 +43,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case DEW_POINT:
 	{
 		const double dewPoint(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyDewPoint(dewPoint);
 		}
@@ -52,7 +52,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case HUMIDITY:
 	{
 		const double humidity(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyHumidity(humidity);
 		}
@@ -61,7 +61,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case ICON:
 	{
 		const std::string iconName(json_object_get_string(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyIcon(iconName);
 		}
@@ -70,7 +70,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case NEAREST_STORM_BEARING:
 	{
 		const double bearing(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyNearestStormBearing(bearing);
 		}
@@ -79,7 +79,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case NEAREST_STORM_DISTANCE:
 	{
 		const double distance(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyNearestStormDistance(distance);
 		}
@@ -88,7 +88,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case OZONE:
 	{
 		const double ozone(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyOzone(ozone);
 		}
@@ -97,7 +97,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case PRECIPITATION_INTENSITY:
 	{
 		const double precipitationIntensity(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyPrecipitationIntensity(precipitationIntensity);
 		}
@@ -106,7 +106,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case PRECIPITATION_PROBABILITY:
 	{
 		const double precipitationProbability(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyPrecipitationProbability(precipitationProbability);
 		}
@@ -115,7 +115,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case PRECIPITATION_TYPE:
 	{
 		const std::string precipitationType(json_object_get_string(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyPrecipitationType(precipitationType);
 		}
@@ -124,7 +124,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case PRESSURE:
 	{
 		const double pressure(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyPressure(pressure);
 		}
@@ -133,7 +133,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case SUMMARY:
 	{
 		const std::string summary(json_object_get_string(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifySummary(summary);
 		}
@@ -142,7 +142,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case DataPointAttribute::TEMPERATURE:
 	{
 		const double temperature(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyTemperature(temperature);
 		}
@@ -151,7 +151,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case TIME:
 	{
 		const time_t time(static_cast<time_t>(json_object_get_int64(pValue)));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyTime(time);
 		}
@@ -160,7 +160,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case VISIBILITY:
 	{
 		const double visibility(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyVisibility(visibility);
 		}
@@ -169,7 +169,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case WIND_BEARING:
 	{
 		const double windBearing(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyWindBearing(windBearing);
 		}
@@ -178,7 +178,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	case WIND_SPEED:
 	{
 		const double windSpeed(json_object_get_double(pValue));
-		for (listeners::SynchronicDataPointDetailsListener* pListener : getListeners())
+		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyWindSpeed(windSpeed);
 		}

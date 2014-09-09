@@ -31,7 +31,6 @@ private:
 
 	void write(const forecast_io::DataPoint& value, std::ostream& output);
 	void write(const forecast_io::SingleDataPoint& value, std::ostream& output);
-	void write(const time_t value, std::ostream& output);
 
 	common::TimeWriter timeWriter;
 	std::string headerRowSeparator;

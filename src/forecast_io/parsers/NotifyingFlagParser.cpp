@@ -51,14 +51,13 @@ const std::string NotifyingFlagParser::DEFAULT_SOURCE_STATION_ATTRIBUTE_SUFFIX =
 
 void NotifyingFlagParser::finishParse()
 {
-	const std::unordered_set<listeners::FlagListener*>& listeners = getListeners();
 	// If there are no sources to notify about,
 	if (sources.empty())
 	{
 		// If there are stations to notify about,
 		if (!stations.empty())
 		{
-			for (listeners::FlagListener* pListener : getListeners())
+			for (listeners::FlagListener* const & pListener : getListeners())
 			{
 				pListener->notifyStations(stations);
 			}
@@ -66,14 +65,14 @@ void NotifyingFlagParser::finishParse()
 	} else if (stations.empty())
 	{
 		// There are sources but no stations to notify about
-		for (listeners::FlagListener* pListener : getListeners())
+		for (listeners::FlagListener* const & pListener : getListeners())
 		{
 			pListener->notifySources(sources);
 		}
 	} else
 	{
 		// There are both sources and stations to notify about
-		for (listeners::FlagListener* pListener : getListeners())
+		for (listeners::FlagListener* const & pListener : getListeners())
 		{
 			pListener->notifySources(sources);
 			pListener->notifyStations(stations);
@@ -104,7 +103,7 @@ void NotifyingFlagParser::parseAttribute(const FlagsAttribute& attribute,
 	case FlagsAttribute::DARKSKY_UNAVAILABLE:
 	{
 		const bool darkskyUnavailable = bool(json_object_get_boolean(pValue));
-		for (listeners::FlagListener* pListener : getListeners())
+		for (listeners::FlagListener* const & pListener : getListeners())
 		{
 			pListener->notifyDarkskyUnavailable(darkskyUnavailable);
 		}
@@ -113,7 +112,7 @@ void NotifyingFlagParser::parseAttribute(const FlagsAttribute& attribute,
 	case FlagsAttribute::METNO_LICENSE:
 	{
 		const bool metnoLicense = bool(json_object_get_boolean(pValue));
-		for (listeners::FlagListener* pListener : getListeners())
+		for (listeners::FlagListener* const & pListener : getListeners())
 		{
 			pListener->notifyMetnoLicense(metnoLicense);
 		}
@@ -129,7 +128,7 @@ void NotifyingFlagParser::parseAttribute(const FlagsAttribute& attribute,
 		const std::string unitsStr(json_object_get_string(pValue));
 		const math::MeasurementSystem& measurementSystem =
 				parseMeasurementSystem(unitsStr);
-		for (listeners::FlagListener* pListener : getListeners())
+		for (listeners::FlagListener* const & pListener : getListeners())
 		{
 			pListener->notifyUnits(measurementSystem);
 		}

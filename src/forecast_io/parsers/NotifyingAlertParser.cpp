@@ -44,7 +44,7 @@ void NotifyingAlertParser::parseAttribute(const AlertAttribute& attribute,
 	case AlertAttribute::DESCRIPTION:
 	{
 		const std::string description(json_object_get_string(pValue));
-		for (listeners::AlertDetailsListener* pListener : getListeners())
+		for (listeners::AlertDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyDescription(description);
 		}
@@ -54,7 +54,7 @@ void NotifyingAlertParser::parseAttribute(const AlertAttribute& attribute,
 	{
 		const time_t expiryTime(
 				static_cast<time_t>(json_object_get_int64(pValue)));
-		for (listeners::AlertDetailsListener* pListener : getListeners())
+		for (listeners::AlertDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyExpiryTime(expiryTime);
 		}
@@ -63,7 +63,7 @@ void NotifyingAlertParser::parseAttribute(const AlertAttribute& attribute,
 	case AlertAttribute::TITLE:
 	{
 		const std::string title(json_object_get_string(pValue));
-		for (listeners::AlertDetailsListener* pListener : getListeners())
+		for (listeners::AlertDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyTitle(title);
 		}
@@ -72,7 +72,7 @@ void NotifyingAlertParser::parseAttribute(const AlertAttribute& attribute,
 	case AlertAttribute::URI:
 	{
 		const std::string uri(json_object_get_string(pValue));
-		for (listeners::AlertDetailsListener* pListener : getListeners())
+		for (listeners::AlertDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyUri(uri);
 		}

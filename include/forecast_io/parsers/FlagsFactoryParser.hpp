@@ -29,24 +29,24 @@ class NotifyingFlagParser;
 class FlagsFactoryParser: public NotifyingFlagParser
 {
 public:
-	FlagsFactoryParser(listeners::FlagsListener* pListener,
+	FlagsFactoryParser(listeners::FlagsListener* pFlagsListener,
 			factories::FlagsFactory* pFactory);
 
-	listeners::FlagsListener* getListener()
+	std::unordered_set<listeners::FlagsListener*>& getFlagsListeners()
 	{
-		return pListener;
+		return flagsListeners;
 	}
 
-	const listeners::FlagsListener* getListener() const
+	const std::unordered_set<listeners::FlagsListener*>& getFlagsListeners() const
 	{
-		return pListener;
+		return flagsListeners;
 	}
 
 	virtual void parse(json_object* const & pJsonObj);
 
 private:
 	factories::FlagsFactory* pFactory;
-	listeners::FlagsListener* pListener;
+	std::unordered_set<listeners::FlagsListener*> flagsListeners;
 
 };
 

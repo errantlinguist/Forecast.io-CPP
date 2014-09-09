@@ -85,7 +85,7 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	case ForecastAttribute::LATITUDE:
 	{
 		const double latitude(json_object_get_double(pValue));
-		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		for (listeners::ForecastDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyLatitude(latitude);
 		}
@@ -94,7 +94,7 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	case ForecastAttribute::LONGITUDE:
 	{
 		const double longitude(json_object_get_double(pValue));
-		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		for (listeners::ForecastDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyLongitude(longitude);
 		}
@@ -109,7 +109,7 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	{
 		const signed char offset(
 				static_cast<signed char>(json_object_get_int64(pValue)));
-		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		for (listeners::ForecastDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyOffset(offset);
 		}
@@ -118,7 +118,7 @@ void NotifyingForecastParser::parseAttribute(const ForecastAttribute& attribute,
 	case ForecastAttribute::TIMEZONE:
 	{
 		const std::string timezone(json_object_get_string(pValue));
-		for (listeners::ForecastDetailsListener* pListener : getListeners())
+		for (listeners::ForecastDetailsListener* const & pListener : getListeners())
 		{
 			pListener->notifyTimezone(timezone);
 		}

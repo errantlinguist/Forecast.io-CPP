@@ -24,7 +24,7 @@ void AlertsFactoryParser::handleArrayElement(json_object* const & arrayElement)
 {
     json::JsonArrayParser<NotifyingAlertParser>::handleArrayElement(arrayElement);
     Alert alert = factory.create();
-    for (listeners::AlertsListener* pListener : getListeners())
+    for (listeners::AlertsListener* const & pListener : getListeners())
     {
         pListener->notifyAlert(alert);
     }

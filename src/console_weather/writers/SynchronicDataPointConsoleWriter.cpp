@@ -105,12 +105,6 @@ void SynchronicDataPointConsoleWriter::write(const forecast_io::SingleDataPoint&
 	output << "Apparent temperature: " << value.getApparentTemperature() << DEGREE_SYMBOL << ' ' << TEMPERATURE_UNITS << '\n';
 }
 
-void SynchronicDataPointConsoleWriter::write(const time_t value, std::ostream& output)
-{
-	// TODO: Finish this?
-}
-
-
 }
 }
 

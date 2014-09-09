@@ -61,7 +61,7 @@ protected:
 
 	virtual void handleUnmappedAttribute(const std::string& key, json_object* const & pValue)
 	{
-		(void)pValue;
+		(void)pValue; // Prevent "unused parameter" warning
 		throw json::ParseError(createUnknownAttributeErrorMessage(key));
 	}
 
