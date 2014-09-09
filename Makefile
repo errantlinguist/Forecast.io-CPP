@@ -12,8 +12,9 @@ RELEASE_FLAGS = -O2	# Extra flags to add for release distributions
 
 ## System settings -------------------------------------------------------------
 SYSTEM_INCLUDE_DIRECTORIES = /usr/include
+C_HEADER_FILE_SUFFIX = .h
 
-vpath %.h $(SYSTEM_INCLUDE_DIRECTORIES)
+vpath %$(C_HEADER_FILE_SUFFIX) $(SYSTEM_INCLUDE_DIRECTORIES)
 
 ## Project settings ------------------------------------------------------------
 
@@ -24,11 +25,13 @@ SOURCE_DIR = ./src
 rwildcard = $(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 SOURCES := $(call rwildcard,$(SOURCE_DIR)/,*$(SOURCE_FILE_SUFFIX))	# The project source code files to compile
 
+PROJECT_HEADER_FILE_SUFFIXES = $(C_HEADER_FILE_SUFFIX) .hpp
+add_directory_files_to_vpath = $(foreach project_header_file_suffix,$(PROJECT_HEADER_FILE_SUFFIXES),$(call vpath,$project_header_file_suffix/,$1))
+
 PROJECT_INCLUDE_DIRECTORIES = include
-HEADER_FILE_SUFFIX = .hpp
-vpath %$(HEADER_FILE_SUFFIX) $(PROJECT_INCLUDE_DIRECTORIES)
+$(add_directory_files_to_vpath $(PROJECT_INCLUDE_DIRECTORIES))
 # Add the system include directory after the project include directory in order to give priority to the project files if there is a name conflict
-vpath %$(HEADER_FILE_SUFFIX) $(SYSTEM_INCLUDE_DIRECTORIES)
+$(add_directory_files_to_vpath $(SYSTEM_INCLUDE_DIRECTORIES))
 CPPFLAGS += $(addprefix -I ,$(PROJECT_INCLUDE_DIRECTORIES) $(SYSTEM_INCLUDE_DIRECTORIES))
 LDLIBS = -lcurl -ljson-c
 

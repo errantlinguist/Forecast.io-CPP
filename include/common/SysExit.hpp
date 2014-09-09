@@ -1,7 +1,7 @@
 #ifndef SYSEXIT_HPP
 #define SYSEXIT_HPP
 
-#include "os_check.hpp"
+#include "os_check.h"
 
 #if UNIX
 	#include "SysExit_posix.hpp"

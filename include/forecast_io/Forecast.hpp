@@ -144,13 +144,14 @@ private:
 
 
 	std::vector<Alert> alerts;
-	SynchronicDataPoint currentWeather;
-	DataBlock minutelyWeather;
-	DataBlock hourlyWeather;
 	Flags flags;
 	math::Coordinate location;
 	time_offset_t offset;
 	std::string timezone;
+
+	SynchronicDataPoint currentWeather;
+	DataBlock minutelyWeather;
+	DataBlock hourlyWeather;
 
 };
 
