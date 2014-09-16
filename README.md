@@ -1,7 +1,7 @@
 Forecast.io-CPP
 ==============
 
-A callback-based C++ wrapper for the Forecast IO API, using the C++11 standard. It is heavily modularised and object-oriented so that multiple listeners can easily be attached to different sections.
+A callback-based C++ wrapper for the [Forecast IO API](https://developer.forecast.io/), using the C++11 standard. It is heavily modularised and object-oriented so that multiple listeners can easily be attached to different sections.
 
 * **Version:** 2014-08-29
 * **Author:** Todd Shore
