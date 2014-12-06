@@ -7,8 +7,6 @@
 #include <string>
 #include <utility>
 
-#include <curl/curl.h>
-
 #include "common/SysExit.hpp"
 #include "console/dimensions.hpp"
 #include "console_weather/ForecastServiceClient.hpp"
