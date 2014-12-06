@@ -14,6 +14,7 @@
 #include "console_weather/ForecastServiceClient.hpp"
 #include "console_weather/ForecastStreamReader.hpp"
 #include "console_weather/writers/ForecastConsoleWriter.hpp"
+#include "curl/CallbackClient.hpp"
 #include "forecast_io/Flags.hpp"
 #include "forecast_io/Forecast.hpp"
 #include "forecast_io/factories/ForecastFactory.hpp"
@@ -67,7 +68,7 @@ static int readUrl(const char* url)
 	// Initialise cURL
 	curl_global_init(CURL_GLOBAL_DEFAULT);
 
-	curl::WriteFunctionClient curlClient;
+	curl::CallbackClient curlClient;
 	console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
 	std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
 	if (pForecast == nullptr)

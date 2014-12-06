@@ -1,7 +1,6 @@
 #ifndef WRITEFUNCTIONCLIENT_HPP
 #define WRITEFUNCTIONCLIENT_HPP
 
-
 #include <curl/curl.h>
 
 namespace curl
@@ -11,7 +10,7 @@ namespace curl
 * A class for setting up a handler for making calls to the cURL library and then cleaning up the associated resources on destruction.
 * <b>NOTE:</b> <a href="http://curl.haxx.se/libcurl/c/curl_global_init.html">curl_global_init</a> should have already been called before creating an instance of this class.
 */
-class WriteFunctionClient
+class CallbackClient
 {
 	public:
 
@@ -23,9 +22,9 @@ class WriteFunctionClient
 		static constexpr long DEFAULT_TIMEOUT = 30L;
 
 		/** Default constructor */
-		WriteFunctionClient();
+		CallbackClient();
 		/** Default destructor */
-		virtual ~WriteFunctionClient();
+		virtual ~CallbackClient();
 
 		/**
 		 * @param[in] url The URL to call.

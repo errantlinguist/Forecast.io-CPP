@@ -2,11 +2,12 @@
 
 #include <iostream>
 
-#include "forecast_io/Forecast.hpp"
-#include "forecast_io/factories/FlagsFactory.hpp"
-#include "forecast_io/factories/ForecastFactory.hpp"
-#include "forecast_io/parsers/ParserManager.hpp"
-#include "json/TokenerParser.hpp"
+#include "../curl/CallbackClient.hpp"
+#include "../forecast_io/Forecast.hpp"
+#include "../forecast_io/factories/FlagsFactory.hpp"
+#include "../forecast_io/factories/ForecastFactory.hpp"
+#include "../forecast_io/parsers/ParserManager.hpp"
+#include "../json/TokenerParser.hpp"
 
 namespace console_weather
 {
@@ -47,7 +48,7 @@ static size_t parseJson(char* readBuffer, size_t size, size_t nmemb,
     return result;
 }
 
-ForecastServiceClient::ForecastServiceClient(curl::WriteFunctionClient& curlClient, math::MeasurementSystem measurementUnits) : curlClient(curlClient), measurementUnits(measurementUnits)
+ForecastServiceClient::ForecastServiceClient(curl::CallbackClient& curlClient, math::MeasurementSystem measurementUnits) : curlClient(curlClient), measurementUnits(measurementUnits)
 {
     //ctor
 }
@@ -65,7 +66,7 @@ std::unique_ptr<forecast_io::Forecast> ForecastServiceClient::get(const char* ur
     forecast_io::parsers::NotifyingForecastParser& forecastParser =
         pParserManager->getForecastParser();
     json::TokenerParser tokenerParser(forecastParser);
-    curl::WriteFunctionClient::WriteFunction* const writeFunction = parseJson;
+    curl::CallbackClient::WriteFunction* const writeFunction = parseJson;
     const CURLcode responseCode =
         curlClient.read(
             url,

@@ -1,13 +1,11 @@
-#include "WriteFunctionClient.hpp"
-
-#include <curl/curl.h>
+#include "CallbackClient.hpp"
 
 // See <http://www.cplusplus.com/forum/unices/45878/#msg249287>
 
 namespace curl
 {
 
-WriteFunctionClient::WriteFunctionClient() : curl(curl_easy_init())
+CallbackClient::CallbackClient() : curl(curl_easy_init())
 {
 	if (!curl)
 	{
@@ -15,12 +13,12 @@ WriteFunctionClient::WriteFunctionClient() : curl(curl_easy_init())
 	}
 }
 
-WriteFunctionClient::~WriteFunctionClient()
+CallbackClient::~CallbackClient()
 {
 	curl_easy_cleanup(curl); // Clean up resources for cURL library
 }
 
-CURLcode WriteFunctionClient::read(const char* url, WriteFunction* pCallback, void* pUserdata,
+CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* pUserdata,
 		long timeout)
 {
 	CURLcode result(CURLE_FAILED_INIT);
@@ -46,7 +44,7 @@ CURLcode WriteFunctionClient::read(const char* url, WriteFunction* pCallback, vo
 	return result;
 }
 
-//CURLcode WriteFunctionClient::read(const char* url, FILE* pOutput, long timeout)
+//CURLcode CallbackClient::read(const char* url, FILE* pOutput, long timeout)
 //{
 //	CURLcode result(CURLE_FAILED_INIT);
 //
