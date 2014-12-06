@@ -7,12 +7,13 @@
 #include <string>
 #include <utility>
 
+#include <curl/curl.h>
+
 #include "common/SysExit.hpp"
 #include "console/dimensions.hpp"
 #include "console_weather/ForecastServiceClient.hpp"
 #include "console_weather/ForecastStreamReader.hpp"
 #include "console_weather/writers/ForecastConsoleWriter.hpp"
-#include "curl/reading.hpp"
 #include "forecast_io/Flags.hpp"
 #include "forecast_io/Forecast.hpp"
 #include "forecast_io/factories/ForecastFactory.hpp"
@@ -66,7 +67,8 @@ static int readUrl(const char* url)
 	// Initialise cURL
 	curl_global_init(CURL_GLOBAL_DEFAULT);
 
-	console_weather::ForecastServiceClient forecastClient(DEFAULT_MEASUREMENT_UNITS);
+	curl::WriteFunctionClient curlClient;
+	console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
 	std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
 	if (pForecast == nullptr)
 	{

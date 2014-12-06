@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "curl/reading.hpp"
 #include "forecast_io/Forecast.hpp"
 #include "forecast_io/factories/FlagsFactory.hpp"
 #include "forecast_io/factories/ForecastFactory.hpp"
@@ -48,7 +47,7 @@ static size_t parseJson(char* readBuffer, size_t size, size_t nmemb,
     return result;
 }
 
-ForecastServiceClient::ForecastServiceClient(math::MeasurementSystem measurementUnits) : measurementUnits(measurementUnits)
+ForecastServiceClient::ForecastServiceClient(curl::WriteFunctionClient& curlClient, math::MeasurementSystem measurementUnits) : curlClient(curlClient), measurementUnits(measurementUnits)
 {
     //ctor
 }
@@ -66,9 +65,9 @@ std::unique_ptr<forecast_io::Forecast> ForecastServiceClient::get(const char* ur
     forecast_io::parsers::NotifyingForecastParser& forecastParser =
         pParserManager->getForecastParser();
     json::TokenerParser tokenerParser(forecastParser);
-    curl::WriteFunction* const writeFunction = parseJson;
+    curl::WriteFunctionClient::WriteFunction* const writeFunction = parseJson;
     const CURLcode responseCode =
-        curl::read(
+        curlClient.read(
             url,
             writeFunction, &tokenerParser);
 

@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "../curl/WriteFunctionClient.hpp"
 #include "../math/MeasurementSystem.hpp"
 
 // Forward declarations
@@ -17,12 +18,13 @@ namespace console_weather
 class ForecastServiceClient
 {
 public:
-    ForecastServiceClient(math::MeasurementSystem measurementUnits);
+    ForecastServiceClient(curl::WriteFunctionClient& curlClient, math::MeasurementSystem measurementUnits);
 
     std::unique_ptr<forecast_io::Forecast> get(const char* url);
 
 private:
     math::MeasurementSystem measurementUnits;
+    curl::WriteFunctionClient& curlClient;
 };
 
 }
