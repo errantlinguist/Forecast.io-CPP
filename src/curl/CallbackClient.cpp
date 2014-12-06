@@ -30,11 +30,11 @@ CallbackClient::~CallbackClient()
 	}
 }
 
-bool CallbackClient::addHeader(const char* const& header)
+bool CallbackClient::addHeader(const char* const& pHeader)
 {
 	bool result(false);
 
-	curl_slist* pNewHeaders = curl_slist_append(pHeaders, header);
+	curl_slist* pNewHeaders = curl_slist_append(pHeaders, pHeader);
 	if (pNewHeaders != NULL)
 	{
 		pHeaders = pNewHeaders;

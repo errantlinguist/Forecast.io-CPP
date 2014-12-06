@@ -29,7 +29,11 @@ class CallbackClient
 		/** Default destructor */
 		virtual ~CallbackClient();
 
-		bool addHeader(const char* const& header);
+		/**
+		 * @param[in] pHeader The header string to add.
+		 * @return true iff the string was successfully added.
+		**/
+		bool addHeader(const char* const& pHeader);
 
 		/**
 		* Gets information about the last cURL action.
