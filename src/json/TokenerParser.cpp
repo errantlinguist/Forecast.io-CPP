@@ -1,7 +1,5 @@
 #include "json/TokenerParser.hpp"
 
-#include <sstream>
-
 // json-c library: https://github.com/json-c/json-c/
 #include <json-c/json.h>
 
@@ -33,11 +31,8 @@ void TokenerParser::parse(const char* const & input, int inputLength)
 		}
 		else
 		{
-			std::stringstream errorMessage(std::stringstream::out);
 			const char * jsonErrorDesc = json_tokener_error_desc(parseErrorCode);
-			errorMessage << "Error while parsing JSON: ";
-			errorMessage << jsonErrorDesc;
-			throw json::ParseError(errorMessage.str());
+			throw json::ParseError(jsonErrorDesc);
 		}
 	}
 }

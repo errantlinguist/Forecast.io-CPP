@@ -21,18 +21,31 @@ class CallbackClient
 
 		static constexpr long DEFAULT_TIMEOUT = 30L;
 
-		/** Default constructor */
+		/**
+		 * @param[in] pErrorBuffer The character array to write any error messages to.
+		 * @throws CURLcode If there was an error while initialising/setting up the cURL handle.
+		**/
 		CallbackClient(char* const& pErrorBuffer);
 		/** Default destructor */
 		virtual ~CallbackClient();
 
+		bool addHeader(const char* const& header);
+
+		/**
+		* Gets information about the last cURL action.
+		* @param[in] info The type of information to get.
+		* @param[out] pInfoData A pointer to a data structure for storing the information returned. This must be a pointer to a long, char array, a curl_slist or a double (see the <a href="http://curl.haxx.se/libcurl/c/curl_easy_getinfo.html#DESCRIPTION">documentation for curl_easy_getinfo</a>).
+		* @return The cURL response code. If this does not equal CURLE_OK, the information should not be trusted.
+		**/
+		CURLcode getInfo(CURLINFO info, void* pInfoData) const;
+
 		/**
 		 * @param[in] url The URL to call.
 		 * @param[in] pCallback The callback function To use for processing the response (see the cURL option "<a href="http://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>").
-		 * @param[out] pUserdata The data structure to output the read data to.
+		 * @param[out] pUserData The data structure to output the read data to.
 		 * @param[in] timeout The response timeout in seconds.
 		 */
-		CURLcode read(const char* url, WriteFunction* pCallback, void* pUserdata, long timeout = DEFAULT_TIMEOUT);
+		CURLcode read(const char* url, WriteFunction* pCallback, void* pUserData, long timeout = DEFAULT_TIMEOUT);
 
 //		/**
 //		 * @param[in] url The URL to call.
@@ -54,6 +67,15 @@ class CallbackClient
 		**/
 		char* const& pErrorBuffer;
 
+		/**
+		* A list of headers to add to the next request sent.
+		*/
+		curl_slist* pHeaders;
+
+		/**
+		 * @param[in] pCurlHandle The cURL easy handle instance to set up.
+		 * @return The cURL response code.
+		**/
 		CURLcode setupHandle(CURL*& pCurlHandle);
 
 };

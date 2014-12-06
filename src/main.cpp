@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <regex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -26,12 +27,48 @@
 
 static constexpr math::MeasurementSystem DEFAULT_MEASUREMENT_UNITS = math::MeasurementSystem::SI;
 static constexpr int DEFAULT_READ_BUFFER_SIZE = 64 * 1024;
+static constexpr char* const & DEFAULT_URL_GETTER_ERROR_MESSAGE = "An error occurred while getting the given URL.";
+static const std::regex VALID_CONTENT_TYPE_REGEX(".+?/json", std::regex_constants::icase | std::regex_constants::optimize);
 
-static std::string createUsageMessage(const char* const& executable)
+static std::string printCurlErrorMessage(const char* const& pCurlErrorMessage)
+{
+	if (std::strcmp(pCurlErrorMessage, "") == 0)
+	{
+		std::cerr << DEFAULT_URL_GETTER_ERROR_MESSAGE << std::endl;
+	} else
+	{
+		std::cerr << "An error occurred while getting the given URL: " << pCurlErrorMessage << std::endl;
+	}
+}
+
+static std::string createJsonParseErrorMessage(const std::exception& e)
+{
+	std::stringstream errorMessage(std::stringstream::out);
+	errorMessage << "There was an error parsing the server response as JSON: ";
+	errorMessage << e.what() << std::endl;
+	return errorMessage.str();
+}
+
+static std::string createUsageMessage(const char* const& pExecutableName)
 {
 	std::stringstream ss(std::stringstream::out);
-	ss << "Usage: " << executable << " [INFILE_PATH|URL]" << std::endl;
+	ss << "Usage: " << pExecutableName << " [INFILE_PATH|URL]" << std::endl;
 	return ss.str();
+}
+
+static bool isLastResponseContentInvalid(const curl::CallbackClient& curlClient, char* const& pInfoBuffer)
+{
+	bool result(false);
+
+	CURLcode infoGetterCode = curlClient.getInfo(CURLINFO_CONTENT_TYPE, pInfoBuffer);
+	if (CURLE_OK == infoGetterCode && pInfoBuffer != NULL)
+	{
+		const std::string infoType(pInfoBuffer);
+		std::smatch jsonMatch;
+		result = (!std::regex_match(infoType, jsonMatch, VALID_CONTENT_TYPE_REGEX));
+	}
+
+	return result;
 }
 
 static void print(forecast_io::Forecast& forecast)
@@ -46,21 +83,26 @@ static int readJsonStream(std::istream& input)
 	int result(EXIT_FAILURE);
 
 	console_weather::ForecastStreamReader forecastReader(DEFAULT_MEASUREMENT_UNITS, DEFAULT_READ_BUFFER_SIZE);
-	std::unique_ptr<forecast_io::Forecast> pForecast = forecastReader.read(input);
-	if (pForecast == nullptr)
+	try {
+		std::unique_ptr<forecast_io::Forecast> pForecast = forecastReader.read(input);
+		if (pForecast == nullptr)
+		{
+			std::cerr << DEFAULT_URL_GETTER_ERROR_MESSAGE << std::endl;
+			result = common::getSysExitCode(common::SysExit::IO_DEVICE_ERROR);
+		} else
+		{
+			print(*pForecast);
+			result = EXIT_SUCCESS;
+		}
+	} catch(const json::ParseError& e)
 	{
-		std::cerr << "An error occurred while reading the input stream." << std::endl;
-		result = common::getSysExitCode(common::SysExit::IO_DEVICE_ERROR);
-	} else
-	{
-		print(*pForecast);
-		result = EXIT_SUCCESS;
+		std::cerr << createJsonParseErrorMessage(e) << std::endl;
 	}
 
 	return EXIT_SUCCESS;
 }
 
-static int readUrl(const char* url)
+static int readUrl(const char* pUrl)
 {
 	int result(EXIT_FAILURE);
 
@@ -71,19 +113,13 @@ static int readUrl(const char* url)
 		try {
 			std::unique_ptr<char[]> pErrorBuffer(new char[CURL_ERROR_SIZE]); // The buffer to which cURL handle error messages are written
 			curl::CallbackClient curlClient(pErrorBuffer.get());
+			curlClient.addHeader("Accept: */json");
 			try {
 				console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
-				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
+				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(pUrl);
 				if (pForecast == nullptr)
 				{
-					const char* curlErrorMessage = pErrorBuffer.get();
-					if (std::strcmp(curlErrorMessage, "") == 0)
-					{
-						std::cerr << "An error occurred while getting the given URL." << std::endl;
-					} else
-					{
-						std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
-					}
+					printCurlErrorMessage(pErrorBuffer.get());
 					result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
 				} else
 				{
@@ -92,31 +128,27 @@ static int readUrl(const char* url)
 				}
 			} catch (const CURLcode& getterCode)
 			{
-				const char* curlErrorMessage = pErrorBuffer.get();
-				if (std::strcmp(curlErrorMessage, "") == 0)
+				const char* pCurlErrorMessage = pErrorBuffer.get();
+				if (std::strcmp(pCurlErrorMessage, "") == 0)
 				{
-					curlErrorMessage = curl_easy_strerror(getterCode);
+					pCurlErrorMessage = curl_easy_strerror(getterCode);
 				}
-				if (std::strcmp(curlErrorMessage, "") == 0)
-				{
-					std::cerr << "An error occurred while getting the given URL." << std::endl;
-				} else
-				{
-					std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
-				}
+				printCurlErrorMessage(pCurlErrorMessage);
 				result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
+			} catch (const json::ParseError& e)
+			{
+				std::cerr << createJsonParseErrorMessage(e) << std::endl;
+
+				// Check if an invalid content type was returned by the server
+				char* pInfoBuffer = NULL;
+				if (isLastResponseContentInvalid(curlClient, pInfoBuffer))
+				{
+					std::cerr << "The response content type was expected to be JSON but was \"" << pInfoBuffer << "\" instead." << std::endl;
+				}
 			}
 		} catch (const CURLcode& handleInitCode)
 		{
-			const char* curlErrorMessage = curl_easy_strerror(handleInitCode);
-			if (std::strcmp(curlErrorMessage, "") == 0)
-			{
-				std::cerr << "An error occurred while getting the given URL." << std::endl;
-			}
-			else
-			{
-				std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
-			}
+			printCurlErrorMessage(curl_easy_strerror(handleInitCode));
 			result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 		}
 
@@ -124,8 +156,8 @@ static int readUrl(const char* url)
 		curl_global_cleanup();
 	} else
 	{
-		const char* curlErrorMessage = curl_easy_strerror(initCode);
-		std::cerr << "An error occurred while initialising the cURL library: " << curlErrorMessage << std::endl;
+		const char* pCurlErrorMessage = curl_easy_strerror(initCode);
+		std::cerr << "An error occurred while initialising the cURL library: " << pCurlErrorMessage << std::endl;
 		result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 	}
 

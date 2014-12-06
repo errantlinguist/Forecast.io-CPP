@@ -11,25 +11,28 @@ namespace console_weather
 {
 
 /**
- * Callback function for CURLOPT_WRITEFUNCTION which incrementally parses the data with LibJSON.
+ * Callback function for <a href="http://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a> which incrementally parses the data with LibJSON.
  *
  * @param[in] readBuffer The buffer to read from. NOTE: Is not null-terminated.
  * @param[in] size The byte size of each element in the buffer.
  * @param[in] nmemb The number of elements in the buffer.
- * @param[out] pUserdata A pointer to an output data structure.
+ * @param[out] pUserData A pointer to an output data structure.
  *
  * @return The amount of bytes processed.
+ * @throw json::ParseException If there was an error while parsing the input as JSON.
+ * @throw std::out_of_range If the amount of bytes to read (i.e. size * nmemb) overflows the parameter type for the JSON parser input.
  **/
 static size_t parseJson(char* readBuffer, size_t size, size_t nmemb,
-                        void* pUserdata)
+                        void* pUserData)
 {
     size_t result(0);
-    if(pUserdata)
+    if(pUserData)
     {
         json::TokenerParser* const pTokenerParser =
-            static_cast<json::TokenerParser*>(pUserdata);
+            static_cast<json::TokenerParser*>(pUserData);
         // Calculate the amount of bytes to be parsed
         result = size * nmemb;
+        // Check that the size does not overflow as an int type
         const int inputSize = static_cast<int>(result);
         const size_t recastResult = static_cast<size_t>(inputSize);
         if(recastResult == result)
@@ -64,11 +67,10 @@ std::unique_ptr<forecast_io::Forecast> ForecastServiceClient::get(const char* ur
     forecast_io::parsers::NotifyingForecastParser& forecastParser =
         pParserManager->getForecastParser();
     json::TokenerParser tokenerParser(forecastParser);
-    curl::CallbackClient::WriteFunction* const writeFunction = parseJson;
     const CURLcode responseCode =
         curlClient.read(
             url,
-            writeFunction, &tokenerParser);
+            parseJson, &tokenerParser);
 
     std::unique_ptr<forecast_io::Forecast> result = nullptr;
     if (CURLE_OK == responseCode)

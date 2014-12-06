@@ -5,7 +5,7 @@
 namespace curl
 {
 
-CallbackClient::CallbackClient(char* const& pErrorBuffer) : pCurlHandle(curl_easy_init()), pErrorBuffer(pErrorBuffer)
+CallbackClient::CallbackClient(char* const& pErrorBuffer) : pCurlHandle(curl_easy_init()), pErrorBuffer(pErrorBuffer), pHeaders(NULL)
 {
 	if (pCurlHandle)
 	{
@@ -22,21 +22,52 @@ CallbackClient::CallbackClient(char* const& pErrorBuffer) : pCurlHandle(curl_eas
 
 CallbackClient::~CallbackClient()
 {
-	curl_easy_cleanup(pCurlHandle); // Clean up resources for cURL library
+	// Clean up resources for cURL library
+	curl_easy_cleanup(pCurlHandle);
+	if (pHeaders != NULL)
+	{
+		curl_slist_free_all(pHeaders);
+	}
 }
 
-CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* pUserdata,
+bool CallbackClient::addHeader(const char* const& header)
+{
+	bool result(false);
+
+	curl_slist* pNewHeaders = curl_slist_append(pHeaders, header);
+	if (pNewHeaders != NULL)
+	{
+		pHeaders = pNewHeaders;
+		result = true;
+	}
+
+	return result;
+}
+
+CURLcode CallbackClient::getInfo(CURLINFO info, void* pInfoData) const
+{
+	return curl_easy_getinfo(pCurlHandle, info, pInfoData);
+}
+
+CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* pUserData,
 		long timeout)
 {
 	CURLcode result(CURLE_FAILED_INIT);
 
 	if (
 			CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEFUNCTION, pCallback))
-			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEDATA, pUserdata))
+			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEDATA, pUserData))
 			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_TIMEOUT, timeout))
 			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_URL, url)))
 	{
-		result = curl_easy_perform(pCurlHandle);
+		if (pHeaders != NULL)
+		{
+			result = curl_easy_setopt(pCurlHandle, CURLOPT_HTTPHEADER, pHeaders);
+			if (CURLE_OK == result)
+			{
+				result = curl_easy_perform(pCurlHandle);
+			}
+		}
 	}
 
 	return result;
@@ -45,7 +76,6 @@ CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* p
 CURLcode CallbackClient::setupHandle(CURL*& pCurlHandle)
 {
 	CURLcode result(curl_easy_setopt(pCurlHandle, CURLOPT_ERRORBUFFER, pErrorBuffer));
-//	CURLcode result(CURLE_OK);
 	if (CURLE_OK == result)
 	{
 		result = curl_easy_setopt(pCurlHandle, CURLOPT_NOPROGRESS, 1L);

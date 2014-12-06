@@ -23,16 +23,18 @@ public:
 	*
 	* @param[in] input The character array to parse.
 	* @param[in] inputLength The input array length.
+	* @throw ParseException If there was an error while parsing the input as JSON.
 	*/
 	void parse(const char* const & input, int inputLength);
 
 	/**
-	 * Parses data from a given inout stream using a given character array as a buffer.
+	 * Parses data from a given input stream using a given character array as a buffer.
 	 *
 	 * @param[in] input The stream to parse.
 	 * @param[in] pBuffer The array to use as a buffer for the stream input.
 	 * @param[in] bufferSize The size of the given buffer.
 	 * @return The amount of bytes processed.
+	 * @throw ParseException If there was an error while parsing the input as JSON.
 	 */
 	std::streamsize parse(std::istream& input, char* pBuffer,
 			int bufferSize);
