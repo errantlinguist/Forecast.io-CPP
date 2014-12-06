@@ -66,17 +66,23 @@ static int readUrl(const char* url)
 	// Initialise cURL
 	curl_global_init(CURL_GLOBAL_DEFAULT);
 
-	curl::CallbackClient curlClient;
-	console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
-	std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
-	if (pForecast == nullptr)
+	try {
+		curl::CallbackClient curlClient;
+		console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
+		std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
+		if (pForecast == nullptr)
+		{
+			std::cerr << "An error occurred while getting the given URL." << std::endl;
+			result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
+		} else
+		{
+			print(*pForecast);
+			result = EXIT_SUCCESS;
+		}
+	} catch (const CURLcode& code)
 	{
-		std::cerr << "An error occurred while getting the given URL." << std::endl;
-		result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
-	} else
-	{
-		print(*pForecast);
-		result = EXIT_SUCCESS;
+		std::cerr << "An error occurred while initialising the cURL library. Error code: " << code << std::endl;
+		result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 	}
 
 	// De-initialise cURL
