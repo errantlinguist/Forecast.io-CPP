@@ -54,6 +54,8 @@ class CallbackClient
 		**/
 		char* errorBuffer;
 
+		CURLcode setupHandle(CURL*& curl);
+
 };
 
 }
