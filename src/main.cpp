@@ -65,7 +65,7 @@ static int readUrl(const char* url)
 
 	// Initialise cURL
 	CURLcode initCode(curl_global_init(CURL_GLOBAL_DEFAULT));
-	if (initCode == 0)
+	if (CURLE_OK == initCode)
 	{
 		try {
 			curl::CallbackClient curlClient;
