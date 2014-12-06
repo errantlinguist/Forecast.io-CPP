@@ -76,7 +76,7 @@ static int readUrl(const char* url)
 				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
 				if (pForecast == nullptr)
 				{
-					const char * curlErrorMessage = errorBuffer.get();
+					const char* curlErrorMessage = errorBuffer.get();
 					if (std::strcmp(curlErrorMessage, "") == 0)
 					{
 						std::cerr << "An error occurred while getting the given URL." << std::endl;
@@ -92,7 +92,7 @@ static int readUrl(const char* url)
 				}
 			} catch (const CURLcode& getterCode)
 			{
-				const char * curlErrorMessage = errorBuffer.get();
+				const char* curlErrorMessage = errorBuffer.get();
 				if (std::strcmp(curlErrorMessage, "") == 0)
 				{
 					curlErrorMessage = curl_easy_strerror(getterCode);
@@ -108,7 +108,7 @@ static int readUrl(const char* url)
 			}
 		} catch (const CURLcode& handleInitCode)
 		{
-			const char * curlErrorMessage = curl_easy_strerror(handleInitCode);
+			const char* curlErrorMessage = curl_easy_strerror(handleInitCode);
 			if (std::strcmp(curlErrorMessage, "") == 0)
 			{
 				std::cerr << "An error occurred while getting the given URL." << std::endl;
@@ -124,7 +124,7 @@ static int readUrl(const char* url)
 		curl_global_cleanup();
 	} else
 	{
-		const char * curlErrorMessage = curl_easy_strerror(initCode);
+		const char* curlErrorMessage = curl_easy_strerror(initCode);
 		std::cerr << "An error occurred while initialising the cURL library: " << curlErrorMessage << std::endl;
 		result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 	}
