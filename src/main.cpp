@@ -69,14 +69,14 @@ static int readUrl(const char* url)
 	if (CURLE_OK == initCode)
 	{
 		try {
-			std::unique_ptr<char[]> errorBuffer(new char[CURL_ERROR_SIZE]); // The buffer to which cURL handle error messages are written
-			curl::CallbackClient curlClient(errorBuffer.get());
+			std::unique_ptr<char[]> pErrorBuffer(new char[CURL_ERROR_SIZE]); // The buffer to which cURL handle error messages are written
+			curl::CallbackClient curlClient(pErrorBuffer.get());
 			try {
 				console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
 				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
 				if (pForecast == nullptr)
 				{
-					const char* curlErrorMessage = errorBuffer.get();
+					const char* curlErrorMessage = pErrorBuffer.get();
 					if (std::strcmp(curlErrorMessage, "") == 0)
 					{
 						std::cerr << "An error occurred while getting the given URL." << std::endl;
@@ -92,7 +92,7 @@ static int readUrl(const char* url)
 				}
 			} catch (const CURLcode& getterCode)
 			{
-				const char* curlErrorMessage = errorBuffer.get();
+				const char* curlErrorMessage = pErrorBuffer.get();
 				if (std::strcmp(curlErrorMessage, "") == 0)
 				{
 					curlErrorMessage = curl_easy_strerror(getterCode);

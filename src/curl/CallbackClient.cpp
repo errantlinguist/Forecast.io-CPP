@@ -5,11 +5,11 @@
 namespace curl
 {
 
-CallbackClient::CallbackClient(char * errorBuffer) : curl(curl_easy_init())
+CallbackClient::CallbackClient(char* const& pErrorBuffer) : pCurlHandle(curl_easy_init()), pErrorBuffer(pErrorBuffer)
 {
-	if (curl)
+	if (pCurlHandle)
 	{
-		CURLcode setupResult = setupHandle(curl);
+		CURLcode setupResult = setupHandle(pCurlHandle);
 		if (CURLE_OK != setupResult)
 		{
 			throw setupResult;
@@ -22,7 +22,7 @@ CallbackClient::CallbackClient(char * errorBuffer) : curl(curl_easy_init())
 
 CallbackClient::~CallbackClient()
 {
-	curl_easy_cleanup(curl); // Clean up resources for cURL library
+	curl_easy_cleanup(pCurlHandle); // Clean up resources for cURL library
 }
 
 CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* pUserdata,
@@ -31,27 +31,27 @@ CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* p
 	CURLcode result(CURLE_FAILED_INIT);
 
 	if (
-			CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, pCallback))
-			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_WRITEDATA, pUserdata))
-			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
-			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_URL, url)))
+			CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEFUNCTION, pCallback))
+			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEDATA, pUserdata))
+			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_TIMEOUT, timeout))
+			&& CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_URL, url)))
 	{
-		result = curl_easy_perform(curl);
+		result = curl_easy_perform(pCurlHandle);
 	}
 
 	return result;
 }
 
-CURLcode CallbackClient::setupHandle(CURL*& curl)
+CURLcode CallbackClient::setupHandle(CURL*& pCurlHandle)
 {
-//	CURLcode result(curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errorBuffer));
-	CURLcode result(CURLE_OK);
+	CURLcode result(curl_easy_setopt(pCurlHandle, CURLOPT_ERRORBUFFER, pErrorBuffer));
+//	CURLcode result(CURLE_OK);
 	if (CURLE_OK == result)
 	{
-		result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+		result = curl_easy_setopt(pCurlHandle, CURLOPT_NOPROGRESS, 1L);
 		if (CURLE_OK == result)
 		{
-			CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L));
+			CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_FOLLOWLOCATION, 1L));
 		}
 	}
 
@@ -63,18 +63,18 @@ CURLcode CallbackClient::setupHandle(CURL*& curl)
 //	CURLcode result(CURLE_FAILED_INIT);
 //
 //	if (CURLE_OK
-//			== (result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L))
+//			== (result = curl_easy_setopt(pCurlHandle, CURLOPT_NOPROGRESS, 1L))
 //			&& CURLE_OK
-//					== (result = curl_easy_setopt(curl,
+//					== (result = curl_easy_setopt(pCurlHandle,
 //							CURLOPT_FOLLOWLOCATION, 1L))
 //			&& CURLE_OK
-//					== (result = curl_easy_setopt(curl, CURLOPT_WRITEDATA,
+//					== (result = curl_easy_setopt(pCurlHandle, CURLOPT_WRITEDATA,
 //							pOutput)) && CURLE_OK == (result =
-//					curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
+//					curl_easy_setopt(pCurlHandle, CURLOPT_TIMEOUT, timeout))
 //			&& CURLE_OK
-//					== (result = curl_easy_setopt(curl, CURLOPT_URL, url)))
+//					== (result = curl_easy_setopt(pCurlHandle, CURLOPT_URL, url)))
 //	{
-//		result = curl_easy_perform(curl);
+//		result = curl_easy_perform(pCurlHandle);
 //	}
 //
 //	return result;

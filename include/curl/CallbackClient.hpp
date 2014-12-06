@@ -15,20 +15,20 @@ class CallbackClient
 	public:
 
 		/**
-		 * The callback function To use for processing server responses (see the cURL option "CURLOPT_WRITEFUNCTION").
+		 * The callback function To use for processing server responses (see the cURL option "<a href="http://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>").
 		**/
 		typedef size_t (WriteFunction)(char*, size_t, size_t, void*);
 
 		static constexpr long DEFAULT_TIMEOUT = 30L;
 
 		/** Default constructor */
-		CallbackClient(char * errorBuffer);
+		CallbackClient(char* const& pErrorBuffer);
 		/** Default destructor */
 		virtual ~CallbackClient();
 
 		/**
 		 * @param[in] url The URL to call.
-		 * @param[in] pCallback The callback function To use for processing the response (see the cURL option "CURLOPT_WRITEFUNCTION").
+		 * @param[in] pCallback The callback function To use for processing the response (see the cURL option "<a href="http://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a>").
 		 * @param[out] pUserdata The data structure to output the read data to.
 		 * @param[in] timeout The response timeout in seconds.
 		 */
@@ -47,14 +47,14 @@ class CallbackClient
 		/**
 		 * The easy handle object for making calls using the cURL library (see <a href="http://curl.haxx.se/libcurl/c/curl_easy_init.html">the cURL API</a>).
 		**/
-		CURL* curl;
+		CURL* pCurlHandle;
 
 		/**
 		 * The buffer to which cURL error messages are written (see <a href="http://curl.haxx.se/libcurl/c/CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a>).
 		**/
-		char* errorBuffer;
+		char* const& pErrorBuffer;
 
-		CURLcode setupHandle(CURL*& curl);
+		CURLcode setupHandle(CURL*& pCurlHandle);
 
 };
 
