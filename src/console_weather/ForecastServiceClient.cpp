@@ -1,7 +1,5 @@
 #include "console_weather/ForecastServiceClient.hpp"
 
-#include <iostream>
-
 #include "../curl/CallbackClient.hpp"
 #include "../forecast_io/Forecast.hpp"
 #include "../forecast_io/factories/FlagsFactory.hpp"
@@ -79,7 +77,7 @@ std::unique_ptr<forecast_io::Forecast> ForecastServiceClient::get(const char* ur
     }
     else
     {
-        std::cerr << "An error occurred while calling the weather API; CURL error code:" << responseCode << std::endl;
+		throw responseCode;
     }
     return result;
 }

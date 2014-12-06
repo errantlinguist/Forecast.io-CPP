@@ -22,7 +22,7 @@ class CallbackClient
 		static constexpr long DEFAULT_TIMEOUT = 30L;
 
 		/** Default constructor */
-		CallbackClient();
+		CallbackClient(char * errorBuffer);
 		/** Default destructor */
 		virtual ~CallbackClient();
 
@@ -48,6 +48,11 @@ class CallbackClient
 		 * The easy handle object for making calls using the cURL library (see <a href="http://curl.haxx.se/libcurl/c/curl_easy_init.html">the cURL API</a>).
 		**/
 		CURL* curl;
+
+		/**
+		 * The buffer to which cURL error messages are written (see <a href="http://curl.haxx.se/libcurl/c/CURLOPT_ERRORBUFFER.html">CURLOPT_ERRORBUFFER</a>).
+		**/
+		char* errorBuffer;
 
 };
 

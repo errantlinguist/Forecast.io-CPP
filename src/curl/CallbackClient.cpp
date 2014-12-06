@@ -5,7 +5,7 @@
 namespace curl
 {
 
-CallbackClient::CallbackClient() : curl(curl_easy_init())
+CallbackClient::CallbackClient(char * errorBuffer) : curl(curl_easy_init())
 {
 	if (!curl)
 	{
@@ -23,20 +23,14 @@ CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* p
 {
 	CURLcode result(CURLE_FAILED_INIT);
 
-	if (CURLE_OK
-			== (result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L))
-			&& CURLE_OK
-					== (result = curl_easy_setopt(curl,
-							CURLOPT_FOLLOWLOCATION, 1L))
-			&& CURLE_OK
-					== (result = curl_easy_setopt(curl,
-							CURLOPT_WRITEFUNCTION, pCallback))
-			&& CURLE_OK
-					== (result = curl_easy_setopt(curl, CURLOPT_WRITEDATA,
-							pUserdata)) && CURLE_OK == (result =
-					curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
-			&& CURLE_OK
-					== (result = curl_easy_setopt(curl, CURLOPT_URL, url)))
+	if (
+			CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errorBuffer))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, pCallback))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_WRITEDATA, pUserdata))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_TIMEOUT, timeout))
+			&& CURLE_OK == (result = curl_easy_setopt(curl, CURLOPT_URL, url)))
 	{
 		result = curl_easy_perform(curl);
 	}
