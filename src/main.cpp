@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -68,14 +69,21 @@ static int readUrl(const char* url)
 	if (CURLE_OK == initCode)
 	{
 		try {
-			char errorBuffer[CURL_ERROR_SIZE]; // The buffer to which cURL handle error messages are written
-			curl::CallbackClient curlClient(errorBuffer);
+			std::unique_ptr<char[]> errorBuffer(new char[CURL_ERROR_SIZE]); // The buffer to which cURL handle error messages are written
+			curl::CallbackClient curlClient(errorBuffer.get());
 			try {
 				console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
 				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
 				if (pForecast == nullptr)
 				{
-					std::cerr << "An error occurred while getting the given URL: " << errorBuffer << std::endl;
+					const char * curlErrorMessage = errorBuffer.get();
+					if (std::strcmp(curlErrorMessage, "") == 0)
+					{
+						std::cerr << "An error occurred while getting the given URL." << std::endl;
+					} else
+					{
+						std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
+					}
 					result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
 				} else
 				{
@@ -84,13 +92,31 @@ static int readUrl(const char* url)
 				}
 			} catch (const CURLcode& getterCode)
 			{
-				std::cerr << "An error occurred while getting the given URL: " << errorBuffer << std::endl;
+				const char * curlErrorMessage = errorBuffer.get();
+				if (std::strcmp(curlErrorMessage, "") == 0)
+				{
+					curlErrorMessage = curl_easy_strerror(getterCode);
+				}
+				if (std::strcmp(curlErrorMessage, "") == 0)
+				{
+					std::cerr << "An error occurred while getting the given URL." << std::endl;
+				} else
+				{
+					std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
+				}
 				result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 			}
 		} catch (const CURLcode& handleInitCode)
 		{
 			const char * curlErrorMessage = curl_easy_strerror(handleInitCode);
-			std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
+			if (std::strcmp(curlErrorMessage, "") == 0)
+			{
+				std::cerr << "An error occurred while getting the given URL." << std::endl;
+			}
+			else
+			{
+				std::cerr << "An error occurred while getting the given URL: " << curlErrorMessage << std::endl;
+			}
 			result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 		}
 

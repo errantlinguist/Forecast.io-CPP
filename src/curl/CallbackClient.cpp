@@ -44,7 +44,8 @@ CURLcode CallbackClient::read(const char* url, WriteFunction* pCallback, void* p
 
 CURLcode CallbackClient::setupHandle(CURL*& curl)
 {
-	CURLcode result(curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errorBuffer));
+//	CURLcode result(curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errorBuffer));
+	CURLcode result(CURLE_OK);
 	if (CURLE_OK == result)
 	{
 		result = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
