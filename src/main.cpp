@@ -64,29 +64,37 @@ static int readUrl(const char* url)
 	int result(EXIT_FAILURE);
 
 	// Initialise cURL
-	curl_global_init(CURL_GLOBAL_DEFAULT);
-
-	try {
-		curl::CallbackClient curlClient;
-		console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
-		std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
-		if (pForecast == nullptr)
-		{
-			std::cerr << "An error occurred while getting the given URL." << std::endl;
-			result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
-		} else
-		{
-			print(*pForecast);
-			result = EXIT_SUCCESS;
-		}
-	} catch (const CURLcode& code)
+	CURLcode initCode(curl_global_init(CURL_GLOBAL_DEFAULT));
+	if (initCode == 0)
 	{
-		std::cerr << "An error occurred while initialising the cURL library. Error code: " << code << std::endl;
+		try {
+			curl::CallbackClient curlClient;
+			console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
+			std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(url);
+			if (pForecast == nullptr)
+			{
+				std::cerr << "An error occurred while getting the given URL." << std::endl;
+				result = common::getSysExitCode(common::SysExit::HOST_UNAVAILABLE);
+			} else
+			{
+				print(*pForecast);
+				result = EXIT_SUCCESS;
+			}
+		} catch (const CURLcode& handleCode)
+		{
+			const char * curlErrorMessage = curl_easy_strerror(handleCode);
+			std::cerr << "An error occurred while initialising the cURL handle: " << curlErrorMessage << std::endl;
+			result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
+		}
+
+		// De-initialise cURL
+		curl_global_cleanup();
+	} else
+	{
+		const char * curlErrorMessage = curl_easy_strerror(initCode);
+		std::cerr << "An error occurred while initialising the cURL library: " << curlErrorMessage << std::endl;
 		result = common::getSysExitCode(common::SysExit::INTERNAL_ERROR);
 	}
-
-	// De-initialise cURL
-	curl_global_cleanup();
 
 	return result;
 }
