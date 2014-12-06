@@ -34,8 +34,9 @@ void TokenerParser::parse(const char* const & input, int inputLength)
 		else
 		{
 			std::stringstream errorMessage(std::stringstream::out);
-			errorMessage << "Error code" << parseErrorCode
-					<< " while parsing JSON.";
+			const char * jsonErrorDesc = json_tokener_error_desc(parseErrorCode);
+			errorMessage << "Error while parsing JSON: ";
+			errorMessage << jsonErrorDesc;
 			throw json::ParseError(errorMessage.str());
 		}
 	}
