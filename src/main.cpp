@@ -113,7 +113,7 @@ static int readUrl(const char* pUrl)
 		try {
 			std::unique_ptr<char[]> pErrorBuffer(new char[CURL_ERROR_SIZE]); // The buffer to which cURL handle error messages are written
 			curl::CallbackClient curlClient(pErrorBuffer.get());
-			curlClient.addHeader("Accept: */json");
+			curlClient.addHeader("Accept: application/json, text/json");
 			try {
 				console_weather::ForecastServiceClient forecastClient(curlClient, DEFAULT_MEASUREMENT_UNITS);
 				std::unique_ptr<forecast_io::Forecast> pForecast = forecastClient.get(pUrl);
