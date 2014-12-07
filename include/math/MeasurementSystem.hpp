@@ -21,7 +21,7 @@ enum class MeasurementSystem
 	_MAX = US
 };
 
-const size_t MeasurementSystem_COUNT = static_cast<size_t>(MeasurementSystem::_MAX) + 1U;
+constexpr size_t MeasurementSystem_COUNT = static_cast<size_t>(MeasurementSystem::_MAX) + 1U;
 
 }
 
