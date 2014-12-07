@@ -1,5 +1,7 @@
 #include "console_weather/ForecastServiceClient.hpp"
 
+#include <limits>
+
 #include "../curl/CallbackClient.hpp"
 #include "../forecast_io/Forecast.hpp"
 #include "../forecast_io/factories/FlagsFactory.hpp"
@@ -9,6 +11,8 @@
 
 namespace console_weather
 {
+
+static constexpr size_t MAX_PARSER_INPUT_SIZE = static_cast<size_t>(std::numeric_limits<int>::max());
 
 /**
  * Callback function for <a href="http://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html">CURLOPT_WRITEFUNCTION</a> which incrementally parses the data with LibJSON.
@@ -33,10 +37,9 @@ static size_t parseJson(char* readBuffer, size_t size, size_t nmemb,
         // Calculate the amount of bytes to be parsed
         result = size * nmemb;
         // Check that the size does not overflow as an int type
-        const int inputSize = static_cast<int>(result);
-        const size_t recastResult = static_cast<size_t>(inputSize);
-        if(recastResult == result)
+        if(result <= MAX_PARSER_INPUT_SIZE)
         {
+			const int inputSize = static_cast<int>(result);
             pTokenerParser->parse(readBuffer, inputSize);
         }
         else
