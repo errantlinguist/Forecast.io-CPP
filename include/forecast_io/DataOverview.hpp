@@ -11,8 +11,8 @@ class DataOverview
 {
 public:
 
-	DataOverview();
-	DataOverview(std::string summary, std::string iconName);
+	DataOverview() noexcept;
+	DataOverview(std::string summary, std::string iconName) noexcept;
 	DataOverview(const DataOverview& copyee) = default;
 	virtual ~DataOverview() = default;
 

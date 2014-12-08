@@ -30,7 +30,7 @@ class FlagsFactoryParser: public NotifyingFlagParser
 {
 public:
 	FlagsFactoryParser(listeners::FlagsListener* pFlagsListener,
-			factories::FlagsFactory* pFactory);
+			factories::FlagsFactory* pFactory) noexcept;
 
 	std::unordered_set<listeners::FlagsListener*>& getFlagsListeners()
 	{

@@ -18,7 +18,7 @@ class SynchronicDataPointDetailsSetter:
 	public common::InstanceReferenceHolder<SynchronicDataPoint>
 {
 public:
-	SynchronicDataPointDetailsSetter(SynchronicDataPoint& instance);
+	SynchronicDataPointDetailsSetter(SynchronicDataPoint& instance) noexcept;
 
 	virtual void notifyApparentTemperature(double temperature);
 	virtual void notifyCloudCover(double cloudCover);

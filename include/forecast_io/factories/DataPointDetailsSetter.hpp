@@ -17,7 +17,7 @@ class DataPointDetailsSetter :
 	public common::InstanceReferenceHolder<DataPoint>
 {
 public:
-	DataPointDetailsSetter(DataPoint& instance);
+	DataPointDetailsSetter(DataPoint& instance) noexcept;
 
 	virtual void notifyCloudCover(double cloudCover);
 	virtual void notifyDewPoint(double dewPoint);

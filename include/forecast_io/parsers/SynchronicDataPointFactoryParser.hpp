@@ -22,7 +22,7 @@ namespace parsers
 class SynchronicDataPointFactoryParser : public forecast_io::parsers::NotifyingSynchronicDataPointParser
 {
 public:
-	SynchronicDataPointFactoryParser(factories::SynchronicDataPointFactory* pFactory);
+	SynchronicDataPointFactoryParser(factories::SynchronicDataPointFactory* pFactory) noexcept;
 
 	virtual void parse(json_object* const & pJsonObj);
 

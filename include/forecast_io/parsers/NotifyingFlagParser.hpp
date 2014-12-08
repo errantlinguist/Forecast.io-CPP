@@ -39,7 +39,7 @@ public:
 			const MeasurementSystemAttributeValueMap& measurementSystemAttributeValues =
 					*MeasurementSystemDefaultAttributeValueMapHolder::getInstance(),
 			std::string sourceStationAttributeSuffix =
-					DEFAULT_SOURCE_STATION_ATTRIBUTE_SUFFIX);
+					DEFAULT_SOURCE_STATION_ATTRIBUTE_SUFFIX) noexcept;
 
 protected:
 

@@ -13,9 +13,9 @@ class Alert
 {
 
 public:
-	Alert();
+	Alert() noexcept;
 	Alert(std::string title, time_t expiryTime, std::string description,
-			std::string uri);
+			std::string uri) noexcept;
 	Alert(const Alert& copyee) = default;
 	virtual ~Alert() = default;
 

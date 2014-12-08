@@ -15,12 +15,12 @@ class Flags
 {
 
 public:
-	Flags(math::MeasurementSystem units);
+	Flags(math::MeasurementSystem units) noexcept;
 	Flags(bool darkskyUnavailable,
 			bool metnoLicense,
 			std::unordered_set<std::string> sources,
 			std::unordered_multimap<std::string, std::string> stations,
-			math::MeasurementSystem units);
+			math::MeasurementSystem units) noexcept;
 	Flags(const Flags& copyee) = default;
 	virtual ~Flags() = default;
 

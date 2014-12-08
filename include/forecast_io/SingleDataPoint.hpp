@@ -9,9 +9,9 @@ namespace forecast_io
 class SingleDataPoint
 {
 public:
-	SingleDataPoint();
+	SingleDataPoint() noexcept;
 	SingleDataPoint(DataPoint baseDataPoint, double temperature,
-			double apparentTemperature);
+			double apparentTemperature) noexcept;
 
 	// Constant getters ---------------------------------------------------------
 	const DataPoint& getBaseDataPoint() const

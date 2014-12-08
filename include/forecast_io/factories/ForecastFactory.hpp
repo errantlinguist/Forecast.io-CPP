@@ -33,7 +33,7 @@ class ForecastFactory: public common::AbstractFactory<std::unique_ptr<Forecast>>
 
 public:
 
-	ForecastFactory(math::MeasurementSystem defaultUnits);
+	ForecastFactory(math::MeasurementSystem defaultUnits) noexcept;
 
 	virtual void notifyAlert(Alert& alert);
 	virtual void notifyCurrentWeather(SynchronicDataPoint& dataPoint);

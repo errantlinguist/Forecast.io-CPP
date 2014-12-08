@@ -14,7 +14,7 @@ public:
 	static std::string createLatitudeString(double latitude);
 	static std::string createLongitudeString(double longitude);
 
-	Coordinate();
+	Coordinate() = default;
 	Coordinate(const Coordinate& copyee) = default;
 	virtual ~Coordinate() = default;
 

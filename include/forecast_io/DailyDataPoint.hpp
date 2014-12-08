@@ -9,8 +9,8 @@ namespace forecast_io
 class DailyDataPoint
 {
 public:
-	DailyDataPoint();
-	DailyDataPoint(AggregateDataPoint baseDataPoint, double moonPhase);
+	DailyDataPoint() noexcept;
+	DailyDataPoint(AggregateDataPoint baseDataPoint, double moonPhase) noexcept;
 
 	// Constant getters ---------------------------------------------------------
 	const AggregateDataPoint& getBaseDataPoint() const
@@ -34,7 +34,7 @@ public:
 	{
 		this->baseDataPoint = baseDataPoint;
 	}
-	
+
 	void setMoonPhase(double moonPhase)
 	{
 		this->moonPhase = moonPhase;

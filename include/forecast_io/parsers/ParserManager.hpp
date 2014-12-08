@@ -27,7 +27,7 @@ namespace parsers
 class ParserManager: public common::Notifier<listeners::ForecastDetailsListener>
 {
 public:
-    ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory);
+    ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory) noexcept;
 
     // Constant getters -----------------------------------------------------
     virtual const NotifyingAlertParser& getNotifyingAlertParser() const;

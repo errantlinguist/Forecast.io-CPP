@@ -2,12 +2,12 @@
 
 #include <limits>
 
-#include "../curl/CallbackClient.hpp"
-#include "../forecast_io/Forecast.hpp"
-#include "../forecast_io/factories/FlagsFactory.hpp"
-#include "../forecast_io/factories/ForecastFactory.hpp"
-#include "../forecast_io/parsers/ParserManager.hpp"
-#include "../json/TokenerParser.hpp"
+#include "curl/CallbackClient.hpp"
+#include "forecast_io/Forecast.hpp"
+#include "forecast_io/factories/FlagsFactory.hpp"
+#include "forecast_io/factories/ForecastFactory.hpp"
+#include "forecast_io/parsers/ParserManager.hpp"
+#include "json/TokenerParser.hpp"
 
 namespace console_weather
 {

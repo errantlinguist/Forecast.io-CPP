@@ -21,7 +21,7 @@ namespace console_weather
 class ForecastServiceClient
 {
 public:
-    ForecastServiceClient(curl::CallbackClient& curlClient, math::MeasurementSystem measurementUnits);
+    ForecastServiceClient(curl::CallbackClient& curlClient, math::MeasurementSystem measurementUnits) noexcept;
 
 	/**
 	 * @param[in] url The API URL get method to call.

@@ -10,8 +10,8 @@ namespace forecast_io
 class Precipitation
 {
 public:
-	Precipitation();
-	Precipitation(double intensity, double probability, std::string type);
+	Precipitation() noexcept;
+	Precipitation(double intensity, double probability, std::string type) noexcept;
 
 // Constant getters ---------------------------------------------------------
 	double getIntensity() const

@@ -23,7 +23,7 @@ class ForecastConsoleWriter
 {
 public:
 
-	ForecastConsoleWriter(int consoleWidth);
+	ForecastConsoleWriter(int consoleWidth) noexcept;
 
 	void write(const forecast_io::Forecast& value, std::ostream& output);
 

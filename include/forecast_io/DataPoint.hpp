@@ -14,9 +14,9 @@ namespace forecast_io
 class DataPoint
 {
 public:
-    DataPoint();
+    DataPoint() noexcept;
     DataPoint(time_t time, DataOverview overview, double cloudCover, double dewPoint, double humidity,
-              double ozone, Precipitation precipitation, double pressure, double visibility, math::RadialVelocity wind);
+              double ozone, Precipitation precipitation, double pressure, double visibility, math::RadialVelocity wind) noexcept;
 
     // Constant getters ---------------------------------------------------------
     double getCloudCover() const

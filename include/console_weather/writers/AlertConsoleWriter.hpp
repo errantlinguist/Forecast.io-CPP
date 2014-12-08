@@ -19,7 +19,7 @@ class AlertConsoleWriter
 {
 public:
 
-	AlertConsoleWriter(int consoleWidth);
+	AlertConsoleWriter(int consoleWidth) noexcept;
 
 	void write(const forecast_io::Alert& value, std::ostream& output);
 

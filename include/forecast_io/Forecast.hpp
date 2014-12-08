@@ -23,8 +23,8 @@ public:
 	// Typedefs
 	typedef signed char time_offset_t;
 
-	Forecast(Flags flags);
-	Forecast(Flags flags, std::vector<Alert> alerts, math::Coordinate location, time_offset_t offset, std::string timezone, SynchronicDataPoint currentWeather, DataBlock minutelyWeather, DataBlock hourlyWeather);
+	Forecast(Flags flags) noexcept;
+	Forecast(Flags flags, std::vector<Alert> alerts, math::Coordinate location, time_offset_t offset, std::string timezone, SynchronicDataPoint currentWeather, DataBlock minutelyWeather, DataBlock hourlyWeather) noexcept;
 
 	// Constant getters ---------------------------------------------------------
 	const std::vector<Alert>& getAlerts() const

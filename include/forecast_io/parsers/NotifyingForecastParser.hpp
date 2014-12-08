@@ -41,7 +41,7 @@ public:
 			AbstractJsonParser& flagParser,
 			NotifyingSynchronicDataPointParser& synchronicDataPointParser,
 			const ForecastAttributeNameMap& attributeNames =
-					DEFAULT_ATTRIBUTE_NAMES);
+					DEFAULT_ATTRIBUTE_NAMES) noexcept;
 
 protected:
 

@@ -10,16 +10,16 @@ namespace forecast_io
 class SynchronicDataPoint
 {
 public:
-	SynchronicDataPoint();
+	SynchronicDataPoint() noexcept;
 	SynchronicDataPoint(SingleDataPoint baseDataPoint,
-			math::RelativePosition<double, double> nearestStorm);
+			math::RelativePosition<double, double> nearestStorm) noexcept;
 
 	// Constant getters ---------------------------------------------------------
 	const SingleDataPoint& getBaseDataPoint() const
 	{
 		return baseDataPoint;
 	}
-	
+
 	math::RelativePosition<double, double> getNearestStorm() const
 	{
 		return nearestStorm;
@@ -30,7 +30,7 @@ public:
 	{
 		return baseDataPoint;
 	}
-	
+
 	math::RelativePosition<double, double>& getNearestStorm()
 	{
 		return nearestStorm;

@@ -21,7 +21,7 @@ namespace console_weather
 class ForecastStreamReader
 {
 public:
-    ForecastStreamReader(math::MeasurementSystem measurementUnits, int readBufferSize);
+    ForecastStreamReader(math::MeasurementSystem measurementUnits, int readBufferSize) noexcept;
 
 	/**
 	* Parses a Forecast object from a stream of JSON data.

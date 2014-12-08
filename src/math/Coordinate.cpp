@@ -57,9 +57,9 @@ std::string Coordinate::createLongitudeString(double longitude)
 
 // Con-/destructors -------------------------------------------------------------
 
-Coordinate::Coordinate() : Coordinate(coord_t(0, 0))
-{
-}
+//Coordinate::Coordinate() : Coordinate(coord_t(0, 0))
+//{
+//}
 
 Coordinate::Coordinate(coord_t coordinatePoint) :
 		coordinatePoint(coordinatePoint)

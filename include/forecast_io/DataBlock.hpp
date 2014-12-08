@@ -18,12 +18,12 @@ class DataBlock
 {
 public:
     /** Default constructor */
-    DataBlock() : DataBlock(0, DataOverview())
+    DataBlock() noexcept : DataBlock(0, DataOverview())
 	{
 		//ctor
 	}
 
-    DataBlock(time_t time, DataOverview overview) : overview(overview), time(time)
+    DataBlock(time_t time, DataOverview overview) noexcept : overview(overview), time(time)
 	{
 		//ctor
 	}

@@ -18,7 +18,7 @@ class SingleDataPointDetailsSetter :
 	public common::InstanceReferenceHolder<SingleDataPoint>
 {
 public:
-	SingleDataPointDetailsSetter(SingleDataPoint& instance);
+	SingleDataPointDetailsSetter(SingleDataPoint& instance) noexcept;
 
 	virtual void notifyApparentTemperature(double temperature);
 	virtual void notifyCloudCover(double cloudCover);

@@ -27,7 +27,7 @@ public:
 	NotifyingSynchronicDataPointParser(
 			listeners::SynchronicDataPointDetailsListener* pListener,
 			const DataPointAttributeNameMap& attributeNames =
-					*DataPointAttributeDefaultNameMapHolder::getInstance());
+					*DataPointAttributeDefaultNameMapHolder::getInstance()) noexcept;
 
 protected:
 

@@ -28,7 +28,7 @@ class AlertsFactoryParser: public json::JsonArrayParser<NotifyingAlertParser>,
 public:
 	AlertsFactoryParser(listeners::AlertsListener* pListener,
 			NotifyingAlertParser& alertParser,
-			factories::AlertFactory* pFactory);
+			factories::AlertFactory* pFactory) noexcept;
 
 protected:
 

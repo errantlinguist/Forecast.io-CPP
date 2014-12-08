@@ -10,7 +10,7 @@ namespace common
 class TimeWriter
 {
 public:
-	TimeWriter(const char* format, size_t maxLength);
+	TimeWriter(const char* format, size_t maxLength) noexcept;
 	TimeWriter(const TimeWriter& copyee) = default;
 	virtual ~TimeWriter() = default;
 

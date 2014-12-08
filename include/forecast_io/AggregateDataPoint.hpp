@@ -11,13 +11,13 @@ namespace forecast_io
 class AggregateDataPoint
 {
 public:
-	AggregateDataPoint();
+	AggregateDataPoint() noexcept;
 	AggregateDataPoint(DataPoint baseDataPoint,
 	double precipitationAccumulation,
 		common::TimestampedValue<double> precipitationIntensityMax,
 		math::Range<time_t> dayLength,
 		math::Range<common::TimestampedValue<double>> temperature,
-		math::Range<common::TimestampedValue<double>> apparentTemperature);
+		math::Range<common::TimestampedValue<double>> apparentTemperature) noexcept;
 
 	// Constant getters ---------------------------------------------------------
 	const DataPoint& getBaseDataPoint() const

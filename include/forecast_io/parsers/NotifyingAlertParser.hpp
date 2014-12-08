@@ -24,7 +24,7 @@ class NotifyingAlertParser: public json::AbstractJsonStateMapParser<
 public:
 	NotifyingAlertParser(listeners::AlertDetailsListener* pListener,
 			const AlertAttributeNameMap& attributeNames =
-					DEFAULT_ATTRIBUTE_NAMES);
+					DEFAULT_ATTRIBUTE_NAMES) noexcept;
 
 protected:
 

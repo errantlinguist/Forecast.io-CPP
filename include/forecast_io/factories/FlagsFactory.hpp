@@ -19,7 +19,7 @@ class FlagsFactory: public common::AbstractFactory<Flags>,
 {
 public:
 
-	FlagsFactory(math::MeasurementSystem defaultUnits);
+	FlagsFactory(math::MeasurementSystem defaultUnits) noexcept;
 
 	virtual Flags create();
 

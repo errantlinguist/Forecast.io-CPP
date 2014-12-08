@@ -10,8 +10,8 @@ namespace math
 class RadialVelocity
 {
 public:
-	RadialVelocity() : RadialVelocity(0, 0) {}
-	RadialVelocity(double magnitude, double direction);
+	RadialVelocity() = default;
+	RadialVelocity(double magnitude, double direction) noexcept;
 	RadialVelocity(const RadialVelocity& copyee) = default;
 	virtual ~RadialVelocity() = default;
 

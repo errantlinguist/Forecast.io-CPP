@@ -23,7 +23,7 @@ static const common::TimeWriter DEFAULT_TIME_WRITER("%c", 48);
 class SynchronicDataPointConsoleWriter
 {
 public:
-	SynchronicDataPointConsoleWriter(int consoleWidth, common::TimeWriter timeWriter = DEFAULT_TIME_WRITER);
+	SynchronicDataPointConsoleWriter(int consoleWidth, common::TimeWriter timeWriter = DEFAULT_TIME_WRITER) noexcept;
 
 	void write(const forecast_io::SynchronicDataPoint& value, std::ostream& output);
 

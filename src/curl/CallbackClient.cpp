@@ -1,4 +1,4 @@
-#include "CallbackClient.hpp"
+#include "curl/CallbackClient.hpp"
 
 // See <http://www.cplusplus.com/forum/unices/45878/#msg249287>
 
