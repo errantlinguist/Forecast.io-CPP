@@ -29,7 +29,7 @@ static void write(const forecast_io::Precipitation& value, std::ostream& output)
 	output << "Intensity: " << value.getIntensity() << '\n';
 	output << "Probability: " << value.getProbability() << '\n';
 	output << "Type: ";
-	const std::string type = value.getType();
+	const std::string& type = value.getType();
 	if (type.empty())
 	{
 		output << "(none)";
@@ -46,7 +46,7 @@ static void write(const math::RadialVelocity& value, std::ostream& output)
 	output << "Speed: " << value.getMagnitude() << ' ' << WINDSPEED_UNITS << '\n';
 }
 
-SynchronicDataPointConsoleWriter::SynchronicDataPointConsoleWriter(int consoleWidth, common::TimeWriter timeWriter) :
+SynchronicDataPointConsoleWriter::SynchronicDataPointConsoleWriter(int consoleWidth, common::TimeWriter timeWriter) noexcept :
 	timeWriter(timeWriter),
 	headerRowSeparator(createHeaderSeparator(SUBSECTION_HEADER_PADDING, consoleWidth)),
 	nearestStormSectionHeader(createPaddedHeader("Nearest storm ", SUBSECTION_HEADER_PADDING, consoleWidth)),

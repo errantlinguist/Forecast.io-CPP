@@ -49,7 +49,7 @@ public:
 
 private:
 
-	ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory, factories::AlertFactory* pAlertFactory);
+	ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory, factories::AlertFactory* pAlertFactory) noexcept;
 
     factories::AlertFactory alertFactory;
     NotifyingAlertParser alertParser;

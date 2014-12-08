@@ -13,7 +13,7 @@ class Alert
 {
 
 public:
-	Alert() noexcept;
+	Alert() = default;
 	Alert(std::string title, time_t expiryTime, std::string description,
 			std::string uri) noexcept;
 	Alert(const Alert& copyee) = default;

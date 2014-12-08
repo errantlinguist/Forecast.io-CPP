@@ -14,7 +14,7 @@ namespace forecast_io
 class DataPoint
 {
 public:
-    DataPoint() noexcept;
+    DataPoint() = default;
     DataPoint(time_t time, DataOverview overview, double cloudCover, double dewPoint, double humidity,
               double ozone, Precipitation precipitation, double pressure, double visibility, math::RadialVelocity wind) noexcept;
 

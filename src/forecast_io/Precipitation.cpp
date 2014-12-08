@@ -7,19 +7,14 @@
 namespace forecast_io
 {
 
-Precipitation::Precipitation() :
-	Precipitation(0.0, 0.0, "")
-{
-
-}
-
 Precipitation::Precipitation(
 	double intensity,
 	double probability,
-	std::string type)
+	std::string type) noexcept
 :
 	intensity(intensity), probability(probability), type(type)
 {
+	// ctor
 }
 
 }

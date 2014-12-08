@@ -12,7 +12,7 @@ namespace parsers
 {
 
 FlagsFactoryParser::FlagsFactoryParser(listeners::FlagsListener* pFlagsListener,
-		factories::FlagsFactory* pFactory) :
+		factories::FlagsFactory* pFactory) noexcept :
 		NotifyingFlagParser(pFactory), pFactory(pFactory), flagsListeners(
 				{pFlagsListener})
 {

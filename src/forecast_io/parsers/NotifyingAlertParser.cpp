@@ -27,7 +27,7 @@ static AlertAttributeNameMap createDefaultAttributeNameMap()
 // Con-/destructors -------------------------------------------------------------
 
 NotifyingAlertParser::NotifyingAlertParser(listeners::AlertDetailsListener* pListener,
-		const AlertAttributeNameMap& attributeNames) :
+		const AlertAttributeNameMap& attributeNames) noexcept :
 		AbstractJsonStateMapParser(attributeNames), Notifier(pListener)
 {
 }

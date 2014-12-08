@@ -69,7 +69,7 @@ public:
 
 private:
 
-	ForecastFactory(math::MeasurementSystem defaultUnits, std::unique_ptr<Forecast> instance);
+	ForecastFactory(math::MeasurementSystem defaultUnits, std::unique_ptr<Forecast> instance) noexcept;
 
 	SynchronicDataPointDetailsSetter currentWeatherDetailsSetter;
 	math::MeasurementSystem defaultUnits;

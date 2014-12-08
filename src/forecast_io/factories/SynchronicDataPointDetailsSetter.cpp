@@ -5,7 +5,7 @@ namespace forecast_io
 namespace factories
 {
 
-SynchronicDataPointDetailsSetter::SynchronicDataPointDetailsSetter(SynchronicDataPoint& instance) :
+SynchronicDataPointDetailsSetter::SynchronicDataPointDetailsSetter(SynchronicDataPoint& instance) noexcept :
 	common::InstanceReferenceHolder<SynchronicDataPoint>(instance),
 	singleDataPointDetailsSetter(instance.getBaseDataPoint())
 {

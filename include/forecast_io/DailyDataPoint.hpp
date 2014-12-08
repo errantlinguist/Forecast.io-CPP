@@ -9,7 +9,7 @@ namespace forecast_io
 class DailyDataPoint
 {
 public:
-	DailyDataPoint() noexcept;
+	DailyDataPoint() = default;
 	DailyDataPoint(AggregateDataPoint baseDataPoint, double moonPhase) noexcept;
 
 	// Constant getters ---------------------------------------------------------

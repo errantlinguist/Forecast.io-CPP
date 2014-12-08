@@ -10,7 +10,7 @@ namespace console_weather
 namespace writers
 {
 
-AlertConsoleWriter::AlertConsoleWriter(int consoleWidth) :
+AlertConsoleWriter::AlertConsoleWriter(int consoleWidth) noexcept :
 	headerSeparator(createHeaderSeparator('-',
 		consoleWidth / 2))
 {

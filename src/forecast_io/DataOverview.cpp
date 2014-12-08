@@ -7,12 +7,7 @@
 namespace forecast_io
 {
 
-DataOverview::DataOverview() : DataOverview("", "")
-{
-}
-
-
-DataOverview::DataOverview(std::string summary, std::string iconName) : summary(summary), iconName(iconName)
+DataOverview::DataOverview(std::string summary, std::string iconName) noexcept : summary(summary), iconName(iconName)
 {
 }
 

@@ -6,7 +6,7 @@ namespace forecast_io
 namespace factories
 {
 
-SingleDataPointDetailsSetter::SingleDataPointDetailsSetter(SingleDataPoint& instance) :
+SingleDataPointDetailsSetter::SingleDataPointDetailsSetter(SingleDataPoint& instance) noexcept :
 	common::InstanceReferenceHolder<SingleDataPoint>(instance),
 	dataPointDetailsSetter(instance.getBaseDataPoint())
 {

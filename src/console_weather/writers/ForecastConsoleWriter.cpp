@@ -13,7 +13,7 @@ namespace console_weather
 namespace writers
 {
 
-ForecastConsoleWriter::ForecastConsoleWriter(int consoleWidth) :
+ForecastConsoleWriter::ForecastConsoleWriter(int consoleWidth) noexcept :
 	alertWriter(consoleWidth),
 	synchronicDataPointWriter(consoleWidth),
 	alertsSectionHeader(createPaddedHeader("ALERTS ", MAIN_SECTION_HEADER_PADDING, consoleWidth)),

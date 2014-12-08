@@ -10,7 +10,7 @@ namespace forecast_io
 class SynchronicDataPoint
 {
 public:
-	SynchronicDataPoint() noexcept;
+	SynchronicDataPoint() = default;
 	SynchronicDataPoint(SingleDataPoint baseDataPoint,
 			math::RelativePosition<double, double> nearestStorm) noexcept;
 

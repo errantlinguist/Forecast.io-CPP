@@ -11,7 +11,7 @@ namespace forecast_io
 class AggregateDataPoint
 {
 public:
-	AggregateDataPoint() noexcept;
+	AggregateDataPoint() = default;
 	AggregateDataPoint(DataPoint baseDataPoint,
 	double precipitationAccumulation,
 		common::TimestampedValue<double> precipitationIntensityMax,

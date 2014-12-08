@@ -9,12 +9,12 @@ namespace forecast_io
 namespace factories
 {
 
-ForecastFactory::ForecastFactory(math::MeasurementSystem defaultUnits) : ForecastFactory(defaultUnits, std::unique_ptr<Forecast>(new Forecast(defaultUnits)))
+ForecastFactory::ForecastFactory(math::MeasurementSystem defaultUnits) noexcept : ForecastFactory(defaultUnits, std::unique_ptr<Forecast>(new Forecast(defaultUnits)))
 {
 
 }
 
-ForecastFactory::ForecastFactory(math::MeasurementSystem defaultUnits, std::unique_ptr<Forecast> instance) :
+ForecastFactory::ForecastFactory(math::MeasurementSystem defaultUnits, std::unique_ptr<Forecast> instance) noexcept :
 	currentWeatherDetailsSetter(instance->getCurrentWeather()),
 	defaultUnits(defaultUnits),
 	result(std::move(instance))

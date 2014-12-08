@@ -11,7 +11,7 @@
 namespace console_weather
 {
 
-ForecastStreamReader::ForecastStreamReader(math::MeasurementSystem measurementUnits, int readBufferSize) :
+ForecastStreamReader::ForecastStreamReader(math::MeasurementSystem measurementUnits, int readBufferSize)  noexcept :
     measurementUnits(measurementUnits),
     pBuffer(new char[static_cast<size_t>(readBufferSize)]),
     readBufferSize(readBufferSize)

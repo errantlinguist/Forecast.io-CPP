@@ -81,7 +81,7 @@ CURLcode CallbackClient::setupHandle(CURL*& pCurlHandle)
 		result = curl_easy_setopt(pCurlHandle, CURLOPT_NOPROGRESS, 1L);
 		if (CURLE_OK == result)
 		{
-			CURLE_OK == (result = curl_easy_setopt(pCurlHandle, CURLOPT_FOLLOWLOCATION, 1L));
+			result = curl_easy_setopt(pCurlHandle, CURLOPT_FOLLOWLOCATION, 1L);
 		}
 	}
 

@@ -54,7 +54,7 @@ protected:
 	// Typedefs
 	typedef std::pair<double, double> coord_t;
 
-	Coordinate(coord_t coordinatePoint);
+	Coordinate(coord_t coordinatePoint) noexcept;
 
 	coord_t getCoordinatePoint() const
 	{

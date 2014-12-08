@@ -3,15 +3,10 @@
 namespace forecast_io
 {
 
-SynchronicDataPoint::SynchronicDataPoint() : SynchronicDataPoint(SingleDataPoint(), math::RelativePosition<double, double>())
-{
-
-}
-
 SynchronicDataPoint::SynchronicDataPoint(
 	SingleDataPoint baseDataPoint,
 	math::RelativePosition<double, double> nearestStorm
-) :
+) noexcept :
 	baseDataPoint(baseDataPoint),
 	nearestStorm(nearestStorm)
 {

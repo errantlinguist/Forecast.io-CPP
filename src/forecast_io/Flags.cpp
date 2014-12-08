@@ -8,7 +8,7 @@ namespace forecast_io
 {
 
 
-Flags::Flags(math::MeasurementSystem units)
+Flags::Flags(math::MeasurementSystem units) noexcept
 :
 	Flags(true,
 	false,
@@ -22,7 +22,7 @@ Flags::Flags(bool darkskyUnavailable,
 			bool metnoLicense,
 			std::unordered_set<std::string> sources,
 			std::unordered_multimap<std::string, std::string> stations,
-			math::MeasurementSystem units) :
+			math::MeasurementSystem units) noexcept :
 		darkskyUnavailable(darkskyUnavailable),
 		metnoLicense(metnoLicense),
 		sources(sources),

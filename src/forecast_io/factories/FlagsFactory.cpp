@@ -7,7 +7,7 @@ namespace forecast_io
 namespace factories
 {
 
-FlagsFactory::FlagsFactory(math::MeasurementSystem defaultUnits) : defaultUnits(defaultUnits), result(defaultUnits)
+FlagsFactory::FlagsFactory(math::MeasurementSystem defaultUnits) noexcept : defaultUnits(defaultUnits), result(defaultUnits)
 {
 
 }

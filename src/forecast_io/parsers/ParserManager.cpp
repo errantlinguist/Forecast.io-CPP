@@ -9,12 +9,12 @@ namespace parsers
 
 // Con-/destructors -------------------------------------------------------------
 
-ParserManager::ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory) :
+ParserManager::ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory) noexcept :
 	ParserManager(pListener, pFlagsFactory, &alertFactory)
 {
 }
 
-ParserManager::ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory, factories::AlertFactory* pAlertFactory) :
+ParserManager::ParserManager(factories::ForecastFactory* pListener, factories::FlagsFactory* pFlagsFactory, factories::AlertFactory* pAlertFactory) noexcept :
     Notifier(pListener),
     alertParser(pAlertFactory),
     alertsParser(pListener, alertParser, pAlertFactory),

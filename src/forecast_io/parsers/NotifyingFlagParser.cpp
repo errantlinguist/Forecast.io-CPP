@@ -38,7 +38,7 @@ static json::ParseError createUnknownMeasurementSystemAttributeValueError(const 
 NotifyingFlagParser::NotifyingFlagParser(listeners::FlagListener* pListener,
 		const FlagsAttributeNameMap& attributeNames,
 		const MeasurementSystemAttributeValueMap& measurementSystemAttributeValues,
-		std::string sourceStationAttributeSuffix) :
+		std::string sourceStationAttributeSuffix) noexcept :
 		AbstractJsonStateMapParser(attributeNames), Notifier(pListener), measurementSystemAttributeValues(
 				measurementSystemAttributeValues), sourceStationAttributeSuffix(
 				sourceStationAttributeSuffix)

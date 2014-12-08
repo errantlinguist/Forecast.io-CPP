@@ -9,7 +9,7 @@ namespace forecast_io
 class SingleDataPoint
 {
 public:
-	SingleDataPoint() noexcept;
+	SingleDataPoint() = default;
 	SingleDataPoint(DataPoint baseDataPoint, double temperature,
 			double apparentTemperature) noexcept;
 

@@ -3,21 +3,6 @@
 namespace forecast_io
 {
 
-DataPoint::DataPoint()
-:
-	DataPoint(0,
-	DataOverview(),
-	0.0,
-	0.0,
-	0.0,
-	0.0,
-	Precipitation(),
-	0.0,
-	0.0,
-	math::RadialVelocity())
-{
-}
-
 DataPoint::DataPoint(
 	time_t time,
 	DataOverview overview,
@@ -29,7 +14,7 @@ DataPoint::DataPoint(
 	double pressure,
 	double visibility,
 	math::RadialVelocity wind
-) :
+) noexcept :
 	cloudCover(cloudCover),
 	dewPoint(dewPoint),
 	humidity(humidity),

@@ -27,10 +27,10 @@
 
 static constexpr math::MeasurementSystem DEFAULT_MEASUREMENT_UNITS = math::MeasurementSystem::SI;
 static constexpr int DEFAULT_READ_BUFFER_SIZE = 64 * 1024;
-static constexpr char* const & DEFAULT_URL_GETTER_ERROR_MESSAGE = "An error occurred while getting the given URL.";
+static constexpr const char* const & DEFAULT_URL_GETTER_ERROR_MESSAGE = "An error occurred while getting the given URL.";
 static const std::regex VALID_CONTENT_TYPE_REGEX(".+?/json", std::regex_constants::icase | std::regex_constants::optimize);
 
-static std::string printCurlErrorMessage(const char* const& pCurlErrorMessage)
+static void printCurlErrorMessage(const char* const& pCurlErrorMessage)
 {
 	if (std::strcmp(pCurlErrorMessage, "") == 0)
 	{

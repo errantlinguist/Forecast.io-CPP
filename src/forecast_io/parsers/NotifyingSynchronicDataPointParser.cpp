@@ -10,7 +10,7 @@ namespace parsers
 
 NotifyingSynchronicDataPointParser::NotifyingSynchronicDataPointParser(
 		listeners::SynchronicDataPointDetailsListener* pListener,
-		const DataPointAttributeNameMap& attributeNames) :
+		const DataPointAttributeNameMap& attributeNames) noexcept :
 		AbstractJsonStateMapParser(attributeNames), Notifier(pListener)
 {
 }
@@ -114,6 +114,7 @@ void NotifyingSynchronicDataPointParser::parseAttribute(
 	}
 	case PRECIPITATION_TYPE:
 	{
+		// NOTE: "currently" data blocks often don't have this attribute
 		const std::string precipitationType(json_object_get_string(pValue));
 		for (listeners::SynchronicDataPointDetailsListener* const & pListener : getListeners())
 		{

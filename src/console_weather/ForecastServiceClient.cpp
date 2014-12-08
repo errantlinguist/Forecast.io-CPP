@@ -52,7 +52,7 @@ static size_t parseJson(char* readBuffer, size_t size, size_t nmemb,
     return result;
 }
 
-ForecastServiceClient::ForecastServiceClient(curl::CallbackClient& curlClient, math::MeasurementSystem measurementUnits) : curlClient(curlClient), measurementUnits(measurementUnits)
+ForecastServiceClient::ForecastServiceClient(curl::CallbackClient& curlClient, math::MeasurementSystem measurementUnits)  noexcept : curlClient(curlClient), measurementUnits(measurementUnits)
 {
     //ctor
 }

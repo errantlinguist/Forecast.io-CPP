@@ -41,7 +41,7 @@ NotifyingForecastParser::NotifyingForecastParser(
 		json::JsonArrayParser<NotifyingAlertParser>& alertsParser,
 		AbstractJsonParser& flagParser,
 		NotifyingSynchronicDataPointParser& synchronicDataPointParser,
-		const ForecastAttributeNameMap& attributeNames) :
+		const ForecastAttributeNameMap& attributeNames) noexcept :
 		AbstractJsonStateMapParser(attributeNames), Notifier(pListener), alertsParser(
 				alertsParser), flagParser(flagParser), synchronicDataPointParser(
 				synchronicDataPointParser)

@@ -7,7 +7,7 @@
 namespace math
 {
 
-RadialVelocity::RadialVelocity(double magnitude, double direction) :
+RadialVelocity::RadialVelocity(double magnitude, double direction) noexcept :
 		magnitude(magnitude), direction(direction)
 {
 }

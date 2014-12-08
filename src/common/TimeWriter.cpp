@@ -5,7 +5,7 @@
 namespace common
 {
 
-TimeWriter::TimeWriter(const char* format, size_t maxLength): format(format), maxLength(maxLength)
+TimeWriter::TimeWriter(const char* format, size_t maxLength) noexcept : format(format), maxLength(maxLength)
 {
 
 }

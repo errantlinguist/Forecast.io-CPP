@@ -33,8 +33,8 @@ public:
     std::unique_ptr<forecast_io::Forecast> get(const char* url);
 
 private:
+	curl::CallbackClient& curlClient;
     math::MeasurementSystem measurementUnits;
-    curl::CallbackClient& curlClient;
 };
 
 }

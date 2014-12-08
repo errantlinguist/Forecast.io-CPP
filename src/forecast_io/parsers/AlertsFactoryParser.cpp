@@ -13,7 +13,7 @@ namespace parsers
 
 AlertsFactoryParser::AlertsFactoryParser(listeners::AlertsListener* pListener,
         NotifyingAlertParser& alertParser,
-        factories::AlertFactory* pFactory) :
+        factories::AlertFactory* pFactory) noexcept :
     JsonArrayParser(alertParser), Notifier(pListener), factory(
         *pFactory)
 {

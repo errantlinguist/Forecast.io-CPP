@@ -7,12 +7,8 @@
 namespace forecast_io
 {
 
-Alert::Alert() : Alert("", 0, "", "")
-{
-}
-
 Alert::Alert(std::string title, time_t expiryTime, std::string description,
-		std::string uri) :
+		std::string uri) noexcept :
 		title(title), expiryTime(expiryTime), description(description), uri(uri)
 {
 }
