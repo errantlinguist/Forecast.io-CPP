@@ -1,8 +1,8 @@
 ## Compiler/linker settings ----------------------------------------------------
 CC = clang
-CFLAGS = -Wall -pedantic -ansi
+CFLAGS = -Wall -pedantic -ansi -march=native
 CXX = clang++
-CXXFLAGS = -Wall -pedantic -ansi -Weffc++ -std=c++11
+CXXFLAGS = -Wall -pedantic -ansi -Weffc++ -std=c++11 -march=native
 
 OBJ_FILE_SUFFIX = .o
 LINK$(OBJ_FILE_SUFFIX) = $(CXX) $(LDFLAGS) $(TARGET_ARCH)	# Use C++ linker by default (instead of C linker)
