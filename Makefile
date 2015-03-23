@@ -58,25 +58,29 @@ OBJ_DIRNAME = obj
 
 # Distributions ---------------------------------------------------------------
 # TODO: Generalize these constants/rules by using eval function (https://www.gnu.org/software/make/manual/html_node/Eval-Function.html) and/or target-specific variable values (https://www.gnu.org/software/make/manual/make.html#Target%5F002dspecific)
-DEBUG_DIR = $(DIST_ROOT_DIR)/Debug
+DEBUG_DIST_NAME = Debug
+DEBUG_CLEAN_TARGET_NAME = clean-$(DEBUG_DIST_NAME)
+DEBUG_DIR = $(DIST_ROOT_DIR)/$(DEBUG_DIST_NAME)
 DEBUG_EXECUTABLE = $(DEBUG_DIR)/$(EXECUTABLE_NAME)
 DEBUG_OBJ_DIR = $(DEBUG_DIR)/$(OBJ_DIRNAME)
 DEBUG_OBJS = $(patsubst $(SOURCE_DIR)/%$(SOURCE_FILE_SUFFIX), $(DEBUG_OBJ_DIR)/%$(OBJ_FILE_SUFFIX), $(SOURCES))	# Set of object files to be compiled
 
-RELEASE_DIR = $(DIST_ROOT_DIR)/Release
+RELEASE_DIST_NAME = Release
+RELEASE_CLEAN_TARGET_NAME = clean-$(RELEASE_DIST_NAME)
+RELEASE_DIR = $(DIST_ROOT_DIR)/$(RELEASE_DIST_NAME)
 RELEASE_EXECUTABLE = $(RELEASE_DIR)/$(EXECUTABLE_NAME)
 RELEASE_OBJ_DIR = $(RELEASE_DIR)/$(OBJ_DIRNAME)
 RELEASE_OBJS = $(patsubst $(SOURCE_DIR)/%$(SOURCE_FILE_SUFFIX), $(RELEASE_OBJ_DIR)/%$(OBJ_FILE_SUFFIX), $(SOURCES))	# Set of object files to be compiled
 
 ## Rules -----------------------------------------------------------------------
 # Default rule to execute
-all: release
+all: $(RELEASE_DIST_NAME)
 
-debug: $(DEBUG_EXECUTABLE)
-release: $(RELEASE_EXECUTABLE)
+$(DEBUG_DIST_NAME): $(DEBUG_EXECUTABLE)
+$(RELEASE_DIST_NAME): $(RELEASE_EXECUTABLE)
 
-compile-debug: | $(DEBUG_OBJS)
-compile-release: | $(RELEASE_OBJS)
+compile-$(DEBUG_DIST_NAME): | $(DEBUG_OBJS)
+compile-$(RELEASE_DIST_NAME): | $(RELEASE_OBJS)
 
 # Rule to create distribution directory before linking executable
 $(DEBUG_EXECUTABLE): | $(DEBUG_DIR)
@@ -113,13 +117,17 @@ $(DEBUG_OBJ_DIR) $(RELEASE_OBJ_DIR):
 	@mkdir -p $@
 	
 # Rule to declare "phony" rules, which don't create any actual files
-.PHONY: clean-all clean-debug clean-release
+.PHONY: clean-all $(DEBUG_CLEAN_TARGET_NAME) $(RELEASE_CLEAN_TARGET_NAME)
 
 # Rule to remove already-built project files
 clean: clean-all
 clean-all:
 	rm -rf $(DIST_ROOT_DIR)
-clean-debug:
+$(DEBUG_CLEAN_TARGET_NAME):
 	rm -rf $(DEBUG_DIR)
-clean-release:
+# Extra target for compatibility with Code::Blocks
+clean$(DEBUG_DIST_NAME): $(DEBUG_CLEAN_TARGET_NAME)
+$(RELEASE_CLEAN_TARGET_NAME):
 	rm -rf $(RELEASE_DIR)
+# Extra target for compatibility with Code::Blocks
+clean$(RELEASE_DIST_NAME): $(RELEASE_CLEAN_TARGET_NAME)

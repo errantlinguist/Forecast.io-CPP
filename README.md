@@ -16,7 +16,7 @@ Requirements
 
 Demo
 ---------------------------
-A makefile is included for building the included demo application `console-weather`: Use the target `debug` to build an executable with debugging symbols and `release` to build one without. As stated above, this makefile was tested largely only on an Ubuntu-based system, so it may need to be changed to work on your system.
+A makefile is included for building the included demo application `console-weather`: Use the target `Debug` to build an executable with debugging symbols and `Release` to build one without. As stated above, this makefile was tested largely only on an Ubuntu-based system, so it may need to be changed to work on your system.
 
 
 To do
