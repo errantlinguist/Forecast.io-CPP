@@ -6,7 +6,7 @@ A callback-based C++ wrapper for the [Forecast IO API](https://developer.forecas
 * **Version:** 2014-12-08
 * **Author:** Todd Shore
 * **Website:** https://github.com/errantlinguist/Forecast.io-CPP
-* **Licensing:** Copyright 2014 Todd Shore. Licensed for distribution under the Apache License 2.0: See the files `NOTICE.txt` and `LICENSE.txt`.
+* **Licensing:** Copyright &copy; 2014 Todd Shore. Licensed for distribution under the Apache License 2.0: See the files `NOTICE.txt` and `LICENSE.txt`.
 
 Requirements
 ---------------------------
