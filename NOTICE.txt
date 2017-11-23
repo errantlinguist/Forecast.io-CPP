@@ -1,0 +1,4 @@
+Forecast.io-CPP
+Copyright 2014 Todd Shore
+
+This product includes software developed by Todd Shore.
